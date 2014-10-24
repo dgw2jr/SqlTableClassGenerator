@@ -13,7 +13,7 @@ namespace SQLTableClassGenerator
 {
     public partial class Form1 : Form
     {
-        private static string server = "primrose";
+        private static string server = ".\\sqlexpress";
 
         public Form1()
         {
