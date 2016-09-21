@@ -52,7 +52,8 @@ namespace SQLTableClassGenerator
             { "image", "byte[]" },
             { "uniqueidentifier", "guid" },
             { "nchar", "string" },
-            { "text", "string" }
+            { "text", "string" },
+            { "geography", "DBGeography" }
 	    };
         
         
@@ -67,7 +68,7 @@ namespace SQLTableClassGenerator
                 }
                 catch (KeyNotFoundException)
                 {
-                    return this.TypeMap.Values.First(v => string.Equals(v, this.SQLType, StringComparison.OrdinalIgnoreCase));
+                    return "object";
                 }
             }
         }
@@ -76,7 +77,7 @@ namespace SQLTableClassGenerator
 
         public override string ToString()
         {
-            return string.Format("public {0} {1} {{ get; set; }};", this.NETType, this.Field);
+            return string.Format("public {0} {1} {{ get; set; }}", this.NETType, this.Field);
         }
 
     }
