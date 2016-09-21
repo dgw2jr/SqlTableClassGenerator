@@ -2,52 +2,25 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
 namespace SQLTableClassGenerator
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        private static string server = ".\\sqlexpress";
+        private readonly IConnectionHandler _connectionHandler;
 
-        public Form1()
+        public MainForm(IConnectionHandler connectionHandler)
         {
             InitializeComponent();
-        }
-
-        public string GetConnectionString()
-        {
-            return string.Format("data source={0};integrated security=true;", server);
-        }
-
-        public void SetConnection()
-        {
-            string input = Microsoft.VisualBasic.Interaction.InputBox("SQL Server to connect to:", "Connect", server);
-            if (input.Length == 0) Environment.Exit(1);
-
-            using (var conn = new SqlConnection(string.Format("data source={0};integrated security=true;", input)))
-            {
-                try
-                {
-                    conn.Open();
-                    server = input;
-                }
-                catch
-                {
-                    MessageBox.Show(string.Format("Could not connect to {0}", input));
-                    SetConnection();
-                }
-            }
+            _connectionHandler = connectionHandler;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            SetConnection();
+            _connectionHandler.SetConnection();
 
             BackgroundWorker bgw = new BackgroundWorker();
             bgw.DoWork += new DoWorkEventHandler(bgw_DoWork);
@@ -81,7 +54,7 @@ namespace SQLTableClassGenerator
                 "msdb"
             };
 
-            using (var conn = new SqlConnection(GetConnectionString()))
+            using (var conn = new SqlConnection(_connectionHandler.GetConnectionString()))
             {
                 conn.Open();
 
@@ -106,16 +79,11 @@ namespace SQLTableClassGenerator
             }
         }
 
-        private void Form1_Shown(object sender, EventArgs e)
-        {
-            
-        }
-
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (e.Node.Level == 0) return;
            
-            using (var conn = new SqlConnection(GetConnectionString()))
+            using (var conn = new SqlConnection(_connectionHandler.GetConnectionString()))
             {
                 conn.Open();
                 conn.ChangeDatabase(e.Node.Parent.Name);
