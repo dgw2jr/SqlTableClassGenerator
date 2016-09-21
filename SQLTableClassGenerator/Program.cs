@@ -20,7 +20,7 @@ namespace SQLTableClassGenerator
 
             using (var scope = GetContainer().BeginLifetimeScope())
             {
-                Application.Run(new MainForm(scope.Resolve<IConnectionHandler>()));
+                Application.Run(scope.Resolve<Form>());
             }
         }
 
@@ -29,6 +29,7 @@ namespace SQLTableClassGenerator
             var builder = new ContainerBuilder();
 
             builder.RegisterType<ConnectionHandler>().AsImplementedInterfaces();
+            builder.RegisterType<MainForm>().As<Form>();
 
             return builder.Build();
         }
