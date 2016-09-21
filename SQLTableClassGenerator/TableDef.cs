@@ -6,9 +6,15 @@ namespace SQLTableClassGenerator
 {
     public class TableDef
     {
-        public string Name;
+        public TableDef(string name, IEnumerable<ColumnDef> columnDefs)
+        {
+            Name = name;
+            Columns = columnDefs;
+        }
 
-        public IEnumerable<ColumnDef> Columns;
+        public string Name { get; }
+
+        public IEnumerable<ColumnDef> Columns { get; }
 
         public override string ToString()
         {

@@ -1,10 +1,11 @@
-﻿namespace SQLTableClassGenerator
+﻿using System.Data.Common;
+
+namespace SQLTableClassGenerator
 {
     public interface IConnectionHandler
     {
-        string Server { get; set; }
+        DbConnection GetConnection();
 
-        string GetConnectionString();
         void SetConnection();
     }
 }

@@ -27,6 +27,12 @@ namespace SQLTableClassGenerator
             { "text", "string" },
             { "geography", "DBGeography" }
 	    };
+
+        public ColumnDef(string columnName, string columnType)
+        {
+            SQLType = columnType;
+            Field = columnName;
+        }
         
         public string SQLType;
 

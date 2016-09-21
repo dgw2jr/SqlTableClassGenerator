@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Autofac;
 
@@ -28,7 +25,9 @@ namespace SQLTableClassGenerator
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<ConnectionHandler>().AsImplementedInterfaces();
+            builder.RegisterType<TreeViewPopulator>().AsImplementedInterfaces();
+            builder.RegisterType<TableDefBuilder>().AsImplementedInterfaces();
+            builder.RegisterType<ConnectionHandler>().AsImplementedInterfaces().InstancePerLifetimeScope();
             builder.RegisterType<MainForm>().As<Form>();
 
             return builder.Build();

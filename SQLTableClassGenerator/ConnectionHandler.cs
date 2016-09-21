@@ -1,27 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data.Common;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SQLTableClassGenerator
 {
     public class ConnectionHandler : IConnectionHandler
     {
-        public static string DefaultServer = ".\\sqlexpress";
+        private static string defaultServer = ".\\sqlexpress";
 
-        public string Server { get; set; }
+        private string server;
 
-        public string GetConnectionString()
+        private string GetConnectionString()
         {
-            return string.Format("data source={0};integrated security=true;", Server);
+            return string.Format("data source={0};integrated security=true;", server);
         }
 
         public void SetConnection()
         {
-            string input = Microsoft.VisualBasic.Interaction.InputBox("SQL Server to connect to:", "Connect", DefaultServer);
+            string input = Microsoft.VisualBasic.Interaction.InputBox("SQL Server to connect to:", "Connect", defaultServer);
             if (input.Length == 0) Environment.Exit(1);
 
             using (var conn = new SqlConnection(string.Format("data source={0};integrated security=true;", input)))
@@ -29,7 +26,7 @@ namespace SQLTableClassGenerator
                 try
                 {
                     conn.Open();
-                    Server = input;
+                    server = input;
                 }
                 catch
                 {
@@ -37,6 +34,11 @@ namespace SQLTableClassGenerator
                     SetConnection();
                 }
             }
+        }
+
+        public DbConnection GetConnection()
+        {
+            return new SqlConnection(GetConnectionString());
         }
     }
 }
