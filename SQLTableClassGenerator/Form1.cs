@@ -73,7 +73,7 @@ namespace SQLTableClassGenerator
 
         private void FillTree()
         {
-            var skipDb = new []
+            var blacklist = new []
             {
                 "master",
                 "model",
@@ -87,7 +87,7 @@ namespace SQLTableClassGenerator
 
                 var databases = conn.GetSchema("Databases").AsEnumerable().OrderBy(o => o[0]);
 
-                foreach (var dbRow in databases.Where(row => !skipDb.Contains(row[0].ToString())))
+                foreach (var dbRow in databases.Where(row => !blacklist.Contains(row[0].ToString())))
                 {
                     var dbName = dbRow[0].ToString();
                     conn.ChangeDatabase(dbName);
