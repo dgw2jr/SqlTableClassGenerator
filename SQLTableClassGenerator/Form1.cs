@@ -73,12 +73,12 @@ namespace SQLTableClassGenerator
 
         private void FillTree()
         {
-            var skipDb = new Dictionary<string, bool>()
+            var skipDb = new []
             {
-                { "master", true },
-                { "model", true },
-                { "tempdb", true },
-                { "msdb", true }
+                "master",
+                "model",
+                "tempdb",
+                "msdb"
             };
 
             using (var conn = new SqlConnection(GetConnectionString()))
@@ -87,22 +87,12 @@ namespace SQLTableClassGenerator
 
                 var databases = conn.GetSchema("Databases").AsEnumerable().OrderBy(o => o[0]);
 
-                foreach (var dbRow in databases)
+                foreach (var dbRow in databases.Where(row => !skipDb.Contains(row[0].ToString())))
                 {
                     var dbName = dbRow[0].ToString();
                     conn.ChangeDatabase(dbName);
                     var tables = conn.GetSchema("Tables").AsEnumerable().OrderBy(o => o[2]);
-
-                    // add a node for each database
-                    try
-                    {
-                        if (skipDb[dbName])
-                            continue;
-                    }
-                    catch
-                    {
-                    }
-
+                    
                     // add database node
                     treeView1.Invoke(new AddDbNode(Add), dbName);
 

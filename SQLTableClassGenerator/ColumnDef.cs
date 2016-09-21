@@ -1,0 +1,55 @@
+using System.Collections.Generic;
+
+namespace SQLTableClassGenerator
+{
+    public class ColumnDef
+    {
+        private Dictionary<string, string> TypeMap = new Dictionary<string, string>() {
+		    { "char", "string" },
+		    { "tinyint", "int" },
+		    { "varchar", "string" },
+            { "nvarchar", "string" },
+		    { "money", "decimal" },
+		    { "datetime", "DateTime" },
+		    { "int", "int" },
+		    { "smallint", "int" },
+		    { "bit", "bool" },
+            { "numeric", "decimal" },
+            { "bigint", "long"},
+            { "timestamp", "byte[]" },
+            { "float", "float" },
+            { "decimal", "decimal" },
+            { "real", "float" },
+            { "smalldatetime", "DateTime" },
+            { "image", "byte[]" },
+            { "uniqueidentifier", "guid" },
+            { "nchar", "string" },
+            { "text", "string" },
+            { "geography", "DBGeography" }
+	    };
+        
+        public string SQLType;
+
+        public string NETType
+        {
+            get
+            {
+                try
+                {
+                    return this.TypeMap[this.SQLType];
+                }
+                catch (KeyNotFoundException)
+                {
+                    return "object";
+                }
+            }
+        }
+
+        public string Field;
+
+        public override string ToString()
+        {
+            return string.Format("public {0} {1} {{ get; set; }}", this.NETType, this.Field);
+        }
+    }
+}
