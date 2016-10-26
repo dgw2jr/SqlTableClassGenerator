@@ -44,6 +44,9 @@ namespace SQLTableClassGenerator.UI
         
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            if (e.Node.Parent == null)
+                return;
+
             GenerateClass(e.Node.Level, e.Node.Name, e.Node.Parent.Name);
         }
 
