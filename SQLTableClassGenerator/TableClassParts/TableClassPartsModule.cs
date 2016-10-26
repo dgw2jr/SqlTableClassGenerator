@@ -10,6 +10,8 @@ namespace SQLTableClassGenerator.TableClassParts
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<TableClassBuilder>().AsImplementedInterfaces();
+
+            // Order of the parts matters, but it shouldn't. Need a design that doesn't rely on registration order.
             builder.RegisterType<ClassHeader>().AsImplementedInterfaces();
             builder.RegisterType<SealedClassHeader>().AsImplementedInterfaces();
             builder.RegisterType<ClassConstructor>().AsImplementedInterfaces();
