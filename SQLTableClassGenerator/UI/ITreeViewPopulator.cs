@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace SQLTableClassGenerator
+namespace SQLTableClassGenerator.UI
 {
     public interface ITreeViewPopulator
     {

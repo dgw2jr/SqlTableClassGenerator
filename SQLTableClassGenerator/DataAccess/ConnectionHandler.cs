@@ -3,7 +3,7 @@ using System.Data.Common;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
-namespace SQLTableClassGenerator
+namespace SQLTableClassGenerator.DataAccess
 {
     public class ConnectionHandler : IConnectionHandler
     {

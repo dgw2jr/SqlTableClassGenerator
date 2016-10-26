@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SQLTableClassGenerator
+namespace SQLTableClassGenerator.TableElements
 {
     public class TableDef
     {

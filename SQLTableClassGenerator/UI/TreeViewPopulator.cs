@@ -2,8 +2,9 @@
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using SQLTableClassGenerator.DataAccess;
 
-namespace SQLTableClassGenerator
+namespace SQLTableClassGenerator.UI
 {
     public class TreeViewPopulator : ITreeViewPopulator
     {

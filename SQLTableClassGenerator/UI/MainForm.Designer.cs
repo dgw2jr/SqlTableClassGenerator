@@ -1,4 +1,4 @@
-﻿namespace SQLTableClassGenerator
+﻿namespace SQLTableClassGenerator.UI
 {
     partial class MainForm
     {

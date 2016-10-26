@@ -1,9 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using SQLTableClassGenerator.DataAccess;
 using SQLTableClassGenerator.Properties;
+using SQLTableClassGenerator.TableClassParts;
+using SQLTableClassGenerator.TableElements;
 
-namespace SQLTableClassGenerator
+namespace SQLTableClassGenerator.UI
 {
     public partial class MainForm : Form
     {

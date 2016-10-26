@@ -1,22 +1,15 @@
 ﻿using System.Data;
+using SQLTableClassGenerator.DataAccess;
 
-namespace SQLTableClassGenerator
+namespace SQLTableClassGenerator.TableElements
 {
     public class TableDefBuilder : ITableDefBuilder
     {
         private readonly IConnectionHandler _connectionHandler;
 
-        private TableClassBuilderOptions _options;
-
         public TableDefBuilder(IConnectionHandler connectionHandler)
         {
             _connectionHandler = connectionHandler;
-        }
-
-        public TableDefBuilder WithOptions(TableClassBuilderOptions options)
-        {
-            _options = options;
-            return this;
         }
 
         public TableDef Build(string databaseName, string tableName)
