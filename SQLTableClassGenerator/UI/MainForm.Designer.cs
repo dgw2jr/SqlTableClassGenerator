@@ -31,9 +31,9 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.checkBox_isSealed = new System.Windows.Forms.CheckBox();
             this.checkBox_generateCtor = new System.Windows.Forms.CheckBox();
             this.richTextBox1 = new System.Windows.Forms.TextBox();
-            this.checkBox_isSealed = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -92,6 +92,17 @@
             this.splitContainer2.SplitterDistance = 40;
             this.splitContainer2.TabIndex = 1;
             // 
+            // checkBox_isSealed
+            // 
+            this.checkBox_isSealed.AutoSize = true;
+            this.checkBox_isSealed.Location = new System.Drawing.Point(260, 12);
+            this.checkBox_isSealed.Name = "checkBox_isSealed";
+            this.checkBox_isSealed.Size = new System.Drawing.Size(111, 29);
+            this.checkBox_isSealed.TabIndex = 1;
+            this.checkBox_isSealed.Text = "Sealed";
+            this.checkBox_isSealed.UseVisualStyleBackColor = true;
+            this.checkBox_isSealed.CheckedChanged += new System.EventHandler(this.checkBox_isSealed_CheckedChanged);
+            // 
             // checkBox_generateCtor
             // 
             this.checkBox_generateCtor.AutoSize = true;
@@ -106,23 +117,15 @@
             // richTextBox1
             // 
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Font = new System.Drawing.Font("Consolas", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox1.Location = new System.Drawing.Point(0, 0);
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(6);
             this.richTextBox1.Multiline = true;
             this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.richTextBox1.Size = new System.Drawing.Size(1296, 1079);
             this.richTextBox1.TabIndex = 1;
-            // 
-            // checkBox_isSealed
-            // 
-            this.checkBox_isSealed.AutoSize = true;
-            this.checkBox_isSealed.Location = new System.Drawing.Point(260, 12);
-            this.checkBox_isSealed.Name = "checkBox_isSealed";
-            this.checkBox_isSealed.Size = new System.Drawing.Size(111, 29);
-            this.checkBox_isSealed.TabIndex = 1;
-            this.checkBox_isSealed.Text = "Sealed";
-            this.checkBox_isSealed.UseVisualStyleBackColor = true;
-            this.checkBox_isSealed.CheckedChanged += new System.EventHandler(this.checkBox_isSealed_CheckedChanged);
+            this.richTextBox1.WordWrap = false;
             // 
             // MainForm
             // 
