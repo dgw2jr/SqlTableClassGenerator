@@ -43,7 +43,15 @@ namespace SQLTableClassGenerator
                 foreach (var dbRow in databases.Where(row => !blacklist.Contains(row[0].ToString())))
                 {
                     var dbName = dbRow[0].ToString();
-                    conn.ChangeDatabase(dbName);
+                    try
+                    {
+                        conn.ChangeDatabase(dbName);
+                    }
+                    catch (Exception exception)
+                    {
+                           continue; 
+                    }
+
                     var tables = conn.GetSchema("Tables").AsEnumerable().OrderBy(o => o[2]);
 
                     // add database node
