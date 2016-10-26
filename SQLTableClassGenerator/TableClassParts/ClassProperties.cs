@@ -1,7 +1,8 @@
 using System;
 using System.Text;
+using SQLTableClassGenerator.TableElements;
 
-namespace SQLTableClassGenerator
+namespace SQLTableClassGenerator.TableClassParts
 {
     public class ClassProperties : ITableClassPart
     {

@@ -1,6 +1,7 @@
 using System;
+using SQLTableClassGenerator.TableElements;
 
-namespace SQLTableClassGenerator
+namespace SQLTableClassGenerator.TableClassParts
 {
     public class ClassHeader : ITableClassPart
     {

@@ -49,33 +49,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClassConstructor.cs" />
-    <Compile Include="ClassFooter.cs" />
-    <Compile Include="ClassHeader.cs" />
-    <Compile Include="ClassProperties.cs" />
-    <Compile Include="ColumnDef.cs" />
-    <Compile Include="ConnectionHandler.cs" />
-    <Compile Include="ITableClassPart.cs" />
-    <Compile Include="ITableClassBuilder.cs" />
-    <Compile Include="ITableDefBuilder.cs" />
-    <Compile Include="ITreeViewPopulator.cs" />
-    <Compile Include="MainForm.cs">
+    <Compile Include="DataAccess\DataAccessModule.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="TableClassParts\ClassConstructor.cs" />
+    <Compile Include="TableClassParts\ClassFooter.cs" />
+    <Compile Include="TableClassParts\ClassHeader.cs" />
+    <Compile Include="TableClassParts\ClassProperties.cs" />
+    <Compile Include="TableClassParts\TableClassPartsModule.cs" />
+    <Compile Include="TableElements\ColumnDef.cs" />
+    <Compile Include="DataAccess\ConnectionHandler.cs" />
+    <Compile Include="TableClassParts\ITableClassPart.cs" />
+    <Compile Include="TableClassParts\ITableClassBuilder.cs" />
+    <Compile Include="TableElements\ITableDefBuilder.cs" />
+    <Compile Include="UI\ITreeViewPopulator.cs" />
+    <Compile Include="UI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="UI\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="IConnectionHandler.cs" />
-    <Compile Include="NullTableClassPart.cs" />
+    <Compile Include="DataAccess\IConnectionHandler.cs" />
+    <Compile Include="TableClassParts\NullTableClassPart.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SealedClassHeader.cs" />
-    <Compile Include="TableClassBuilder.cs" />
-    <Compile Include="TableDef.cs" />
-    <Compile Include="TableDefBuilder.cs" />
-    <Compile Include="TableClassBuilderOptions.cs" />
-    <Compile Include="TreeViewPopulator.cs" />
-    <EmbeddedResource Include="MainForm.resx">
+    <Compile Include="TableClassParts\SealedClassHeader.cs" />
+    <Compile Include="TableClassParts\TableClassBuilder.cs" />
+    <Compile Include="TableElements\TableDef.cs" />
+    <Compile Include="TableElements\TableDefBuilder.cs" />
+    <Compile Include="TableElements\TableElementsModule.cs" />
+    <Compile Include="UI\TreeViewPopulator.cs" />
+    <Compile Include="UI\UIModule.cs" />
+    <EmbeddedResource Include="UI\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

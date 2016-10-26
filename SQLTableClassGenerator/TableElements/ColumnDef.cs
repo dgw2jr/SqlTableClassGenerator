@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace SQLTableClassGenerator
+namespace SQLTableClassGenerator.TableElements
 {
     public class ColumnDef
     {
@@ -34,7 +34,6 @@ namespace SQLTableClassGenerator
             Field = columnName;
         }
         
-        public string SQLType;
 
         public string NETType
         {
@@ -51,8 +50,16 @@ namespace SQLTableClassGenerator
             }
         }
 
-        public string Field;
+        public string SQLType
+        {
+            get;
+        }
 
+        public string Field
+        {
+            get;
+        }
+        
         public override string ToString()
         {
             return string.Format("public {0} {1} {{ get; set; }}", this.NETType, this.Field);

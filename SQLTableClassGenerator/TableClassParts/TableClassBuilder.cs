@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using SQLTableClassGenerator.TableElements;
 
-namespace SQLTableClassGenerator
+namespace SQLTableClassGenerator.TableClassParts
 {
     public class TableClassBuilder : ITableClassBuilder
     {

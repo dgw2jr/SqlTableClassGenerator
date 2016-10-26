@@ -1,4 +1,6 @@
-namespace SQLTableClassGenerator
+using SQLTableClassGenerator.TableElements;
+
+namespace SQLTableClassGenerator.TableClassParts
 {
     public class NullTableClassPart : ITableClassPart
     {

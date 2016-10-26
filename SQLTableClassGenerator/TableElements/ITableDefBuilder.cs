@@ -1,4 +1,4 @@
-﻿namespace SQLTableClassGenerator
+﻿namespace SQLTableClassGenerator.TableElements
 {
     public interface ITableDefBuilder
     {
