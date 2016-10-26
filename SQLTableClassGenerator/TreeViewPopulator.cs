@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -12,14 +13,12 @@ namespace SQLTableClassGenerator
         {
             _connectionHandler = connectionHandler;
         }
-
-        private delegate void AddDbNode(TreeView tree, string Name);
+        
         private void Add(TreeView tree, string Name)
         {
             tree.Nodes.Add(Name, Name);
         }
-
-        private delegate void AddTblNode(TreeView tree, string dbName, string tblName);
+        
         private void Add(TreeView tree, string dbName, string tblName)
         {
             tree.Nodes[dbName].Nodes.Add(tblName, tblName);
@@ -48,13 +47,13 @@ namespace SQLTableClassGenerator
                     var tables = conn.GetSchema("Tables").AsEnumerable().OrderBy(o => o[2]);
 
                     // add database node
-                    tree.Invoke(new AddDbNode(Add), tree, dbName);
+                    tree.Invoke(new Action(() => Add(tree, dbName)));
 
                     // add tables for database nodes
                     foreach (DataRow row in tables)
                     {
                         var tableName = row[2].ToString();
-                        tree.Invoke(new AddTblNode(Add), tree, dbName, tableName);
+                        tree.Invoke(new Action(() => Add(tree, dbName, tableName)));
                     }
                 }
             }

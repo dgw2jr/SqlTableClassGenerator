@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using SQLTableClassGenerator.Properties;
 
 namespace SQLTableClassGenerator
 {
@@ -8,13 +9,19 @@ namespace SQLTableClassGenerator
     {
         private readonly IConnectionHandler _connectionHandler;
         private readonly ITableDefBuilder _tableDefBuilder;
+        private readonly ITableClassBuilder _tableClassBuilder;
         private readonly ITreeViewPopulator _treeViewPopulator;
 
-        public MainForm(IConnectionHandler connectionHandler, ITableDefBuilder tableDefBuilder, ITreeViewPopulator treePopulator)
+        public MainForm(
+            IConnectionHandler connectionHandler, 
+            ITableDefBuilder tableDefBuilder,
+            ITableClassBuilder tableClassBuilder,
+            ITreeViewPopulator treePopulator)
         {
             InitializeComponent();
             _connectionHandler = connectionHandler;
             _tableDefBuilder = tableDefBuilder;
+            _tableClassBuilder = tableClassBuilder;
             _treeViewPopulator = treePopulator;
         }
 
@@ -34,9 +41,36 @@ namespace SQLTableClassGenerator
         
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (e.Node.Level == 0) return;
+            GenerateClass(e.Node.Level, e.Node.Name, e.Node.Parent.Name);
+        }
 
-            richTextBox1.Text = _tableDefBuilder.Build(e.Node.Parent.Name, e.Node.Name).ToString();
+        private void checkBox_generateCtor_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.GenerateConstructor = ((CheckBox)sender).Checked;
+
+            if (treeView1.SelectedNode == null)
+                return;
+
+            GenerateClass(treeView1.SelectedNode.Level, treeView1.SelectedNode.Name, treeView1.SelectedNode.Parent.Name);
+        }
+
+        private void GenerateClass(int nodeLevel, string name, string parentName)
+        {
+            if (nodeLevel == 0) return;
+
+            var tableDef = _tableDefBuilder.Build(parentName, name);
+
+            richTextBox1.Text = _tableClassBuilder.Build(tableDef);
+        }
+
+        private void checkBox_isSealed_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.IsSealed = ((CheckBox)sender).Checked;
+
+            if (treeView1.SelectedNode == null)
+                return;
+
+            GenerateClass(treeView1.SelectedNode.Level, treeView1.SelectedNode.Name, treeView1.SelectedNode.Parent.Name);
         }
     }
 }

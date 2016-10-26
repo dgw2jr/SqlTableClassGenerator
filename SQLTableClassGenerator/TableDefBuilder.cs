@@ -6,9 +6,17 @@ namespace SQLTableClassGenerator
     {
         private readonly IConnectionHandler _connectionHandler;
 
+        private TableClassBuilderOptions _options;
+
         public TableDefBuilder(IConnectionHandler connectionHandler)
         {
             _connectionHandler = connectionHandler;
+        }
+
+        public TableDefBuilder WithOptions(TableClassBuilderOptions options)
+        {
+            _options = options;
+            return this;
         }
 
         public TableDef Build(string databaseName, string tableName)

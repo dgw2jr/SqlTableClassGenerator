@@ -49,8 +49,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClassConstructor.cs" />
+    <Compile Include="ClassFooter.cs" />
+    <Compile Include="ClassHeader.cs" />
+    <Compile Include="ClassProperties.cs" />
     <Compile Include="ColumnDef.cs" />
     <Compile Include="ConnectionHandler.cs" />
+    <Compile Include="ITableClassPart.cs" />
+    <Compile Include="ITableClassBuilder.cs" />
     <Compile Include="ITableDefBuilder.cs" />
     <Compile Include="ITreeViewPopulator.cs" />
     <Compile Include="MainForm.cs">
@@ -62,8 +68,11 @@
     <Compile Include="IConnectionHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SealedClassHeader.cs" />
+    <Compile Include="TableClassBuilder.cs" />
     <Compile Include="TableDef.cs" />
     <Compile Include="TableDefBuilder.cs" />
+    <Compile Include="TableClassBuilderOptions.cs" />
     <Compile Include="TreeViewPopulator.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

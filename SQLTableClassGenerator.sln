@@ -1,7 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLTableClassGenerator", "SQLTableClassGenerator\SQLTableClassGenerator.csproj", "{44E38438-59DC-4D26-924F-15B33FB66DD2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLTableClassGenerator.Tests", "SQLTableClassGenerator.Tests\SQLTableClassGenerator.Tests.csproj", "{37C17618-E1AD-4949-AA8B-1495C1FFC71B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +17,10 @@ Global
 		{44E38438-59DC-4D26-924F-15B33FB66DD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44E38438-59DC-4D26-924F-15B33FB66DD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44E38438-59DC-4D26-924F-15B33FB66DD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37C17618-E1AD-4949-AA8B-1495C1FFC71B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37C17618-E1AD-4949-AA8B-1495C1FFC71B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37C17618-E1AD-4949-AA8B-1495C1FFC71B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37C17618-E1AD-4949-AA8B-1495C1FFC71B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
