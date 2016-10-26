@@ -66,6 +66,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="IConnectionHandler.cs" />
+    <Compile Include="NullTableClassPart.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SealedClassHeader.cs" />

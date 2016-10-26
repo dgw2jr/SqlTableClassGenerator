@@ -43,13 +43,9 @@ namespace SQLTableClassGenerator
                 {
                     var all = ctx.Resolve<IEnumerable<ITableClassPart>>();
 
-                    if (!Settings.Default.GenerateConstructor)
-                    {
-                        all = all.Where(part => part.GetType() != typeof(ClassConstructor));
-                    }
-
-                    all = all.Where(part => part.GetType() != (Settings.Default.IsSealed ? typeof(ClassHeader) : typeof(SealedClassHeader)));
-
+                    all = all.Switch<ClassConstructor, NullTableClassPart, ITableClassPart>(Settings.Default.GenerateConstructor);
+                    all = all.Switch<SealedClassHeader, ClassHeader, ITableClassPart>(Settings.Default.IsSealed);
+                    
                     return all;
                 };
             });
@@ -60,6 +56,11 @@ namespace SQLTableClassGenerator
             builder.RegisterType<MainForm>().As<Form>();
 
             return builder.Build();
+        }
+
+        private static IEnumerable<T> Switch<TOn, TOff, T>(this IEnumerable<T> list, bool predicate)
+        {
+            return list.Where(item => item.GetType() != (predicate ? typeof(TOff) : typeof(TOn)));
         }
     }
 }
