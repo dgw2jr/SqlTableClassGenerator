@@ -1,2 +1,2 @@
 # SqlTableClassGenerator
-Creates POCOs from SQL tables
+Create POCOs from SQL tables
