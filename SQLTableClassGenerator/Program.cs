@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Windows.Forms;
 using Autofac;
+using Microsoft.CodeAnalysis;
 
 namespace SQLTableClassGenerator
 {
@@ -27,6 +28,8 @@ namespace SQLTableClassGenerator
             var builder = new ContainerBuilder();
 
             builder.RegisterAssemblyModules(Assembly.GetExecutingAssembly());
+
+            builder.Register(c => new AdhocWorkspace()).AsSelf();
             
             return builder.Build();
         }

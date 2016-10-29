@@ -7,6 +7,7 @@ namespace SQLTableClassGenerator.TableElements
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<TableDefBuilder>().AsImplementedInterfaces();
+            builder.RegisterType<ColumnDefBuilder>().AsImplementedInterfaces();
         }
     }
 }

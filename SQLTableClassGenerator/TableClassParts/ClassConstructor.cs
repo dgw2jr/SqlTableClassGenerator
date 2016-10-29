@@ -11,7 +11,7 @@ namespace SQLTableClassGenerator.TableClassParts
         {
             var sb = new StringBuilder();
 
-            var paramList = table.Columns.Select(c => string.Format("{0} {1}", c.NETType, c.Field.ToLower()));
+            var paramList = table.Columns.Select(c => string.Format("{0} {1}", c.Type, c.Field.ToLower()));
             var paramListStr = string.Join(", ", paramList);
             var ctorHead = string.Format("\tpublic {1}({2}){0}\t{{{0}", Environment.NewLine, table.Name, paramListStr);
 
@@ -26,4 +26,5 @@ namespace SQLTableClassGenerator.TableClassParts
             return sb.ToString();
         }
     }
+
 }

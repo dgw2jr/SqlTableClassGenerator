@@ -14,12 +14,12 @@ namespace SQLTableClassGenerator.UI
         {
             _connectionHandler = connectionHandler;
         }
-        
+
         private void Add(TreeView tree, string Name)
         {
             tree.Nodes.Add(Name, Name);
         }
-        
+
         private void Add(TreeView tree, string dbName, string tblName)
         {
             tree.Nodes[dbName].Nodes.Add(tblName, tblName);
@@ -50,7 +50,7 @@ namespace SQLTableClassGenerator.UI
                     }
                     catch (Exception exception)
                     {
-                           continue; 
+                        continue;
                     }
 
                     var tables = conn.GetSchema("Tables").AsEnumerable().OrderBy(o => o[2]);
@@ -61,8 +61,9 @@ namespace SQLTableClassGenerator.UI
                     // add tables for database nodes
                     foreach (DataRow row in tables)
                     {
+                        var schema = row[1].ToString();
                         var tableName = row[2].ToString();
-                        tree.Invoke(new Action(() => Add(tree, dbName, tableName)));
+                        tree.Invoke(new Action(() => Add(tree, dbName, $"{schema}.{tableName}")));
                     }
                 }
             }
