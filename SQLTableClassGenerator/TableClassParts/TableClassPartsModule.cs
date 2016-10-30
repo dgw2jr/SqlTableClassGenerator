@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Autofac;
-using SQLTableClassGenerator.Properties;
+﻿using Autofac;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Editing;
 
 namespace SQLTableClassGenerator.TableClassParts
 {
@@ -9,29 +8,14 @@ namespace SQLTableClassGenerator.TableClassParts
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<TableClassBuilder>().AsImplementedInterfaces();
+            builder.Register(c => SyntaxGenerator.GetGenerator(c.Resolve<AdhocWorkspace>(), LanguageNames.CSharp)).AsSelf();
 
-            // Order of the parts matters, but it shouldn't. Need a design that doesn't rely on registration order.
-            builder.RegisterType<ClassHeader>().AsImplementedInterfaces();
-            builder.RegisterType<SealedClassHeader>().AsImplementedInterfaces();
-            builder.RegisterType<ClassConstructorV2>().AsImplementedInterfaces();
-            builder.RegisterType<ClassProperties>().AsImplementedInterfaces();
-            builder.RegisterType<ClassFooter>().AsImplementedInterfaces();
+            builder.RegisterType<RoslynTableClassBuilder>().AsImplementedInterfaces();
+            builder.RegisterType<ConstructorParameterBuilder>().AsSelf();
 
-            builder.Register<Func<IEnumerable<ITableClassPart>>>(c =>
-            {
-                var ctx = c.Resolve<IComponentContext>();
-
-                return () =>
-                {
-                    var all = ctx.Resolve<IEnumerable<ITableClassPart>>();
-
-                    all = all.Switch<ClassConstructorV2, NullTableClassPart, ITableClassPart>(Settings.Default.GenerateConstructor);
-                    all = all.Switch<SealedClassHeader, ClassHeader, ITableClassPart>(Settings.Default.IsSealed);
-
-                    return all;
-                };
-            });
+            builder.RegisterType<ClassBuilder>().AsSelf();
+            builder.RegisterType<ConstructorBuilder>().AsImplementedInterfaces();
+            builder.RegisterType<PropertiesBuilder>().AsImplementedInterfaces();
         }
     }
 }

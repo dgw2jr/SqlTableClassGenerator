@@ -112,15 +112,15 @@
   <ItemGroup>
     <Compile Include="DataAccess\DataAccessModule.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="TableClassParts\ClassConstructor.cs" />
-    <Compile Include="TableClassParts\ClassConstructorV2.cs" />
-    <Compile Include="TableClassParts\ClassFooter.cs" />
-    <Compile Include="TableClassParts\ClassHeader.cs" />
-    <Compile Include="TableClassParts\ClassProperties.cs" />
+    <Compile Include="TableClassParts\ConstructorBuilder.cs" />
+    <Compile Include="TableClassParts\ClassBuilder.cs" />
+    <Compile Include="TableClassParts\IBuilderForTable.cs" />
+    <Compile Include="TableClassParts\PropertiesBuilder.cs" />
+    <Compile Include="TableClassParts\ConstructorParameterBuilder.cs" />
+    <Compile Include="TableClassParts\RoslynTableClassBuilder.cs" />
     <Compile Include="TableClassParts\TableClassPartsModule.cs" />
     <Compile Include="TableElements\ColumnDef.cs" />
     <Compile Include="DataAccess\ConnectionHandler.cs" />
-    <Compile Include="TableClassParts\ITableClassPart.cs" />
     <Compile Include="TableClassParts\ITableClassBuilder.cs" />
     <Compile Include="TableElements\ColumnDefBuilder.cs" />
     <Compile Include="TableElements\IColumnDefBuilder.cs" />
@@ -133,11 +133,8 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\IConnectionHandler.cs" />
-    <Compile Include="TableClassParts\NullTableClassPart.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TableClassParts\SealedClassHeader.cs" />
-    <Compile Include="TableClassParts\TableClassBuilder.cs" />
     <Compile Include="TableElements\TableDef.cs" />
     <Compile Include="TableElements\TableDefBuilder.cs" />
     <Compile Include="TableElements\TableElementsModule.cs" />
