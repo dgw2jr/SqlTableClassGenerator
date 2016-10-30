@@ -20,7 +20,7 @@ namespace SQLTableClassGenerator.TableClassParts
             var props = table.Columns.Select(c =>
                 _generator.PropertyDeclaration(c.Field,
                     c.Type.TypeExpression(),
-                    ));
+                    accessibility: Accessibility.Public));
 
             return props;
         }
