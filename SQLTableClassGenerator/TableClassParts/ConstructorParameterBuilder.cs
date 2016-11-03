@@ -1,33 +1,25 @@
 using System.Linq;
 using System.Collections.Generic;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Editing;
 using SQLTableClassGenerator.TableElements;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SQLTableClassGenerator.TableClassParts
 {
     public sealed class ConstructorParameterBuilder
     {
-        private readonly SyntaxGenerator _generator;
-
-        public ConstructorParameterBuilder(SyntaxGenerator generator)
+        public ParameterSyntax[] Build(TableDef table)
         {
-            _generator = generator;
-        }
-
-        public IEnumerable<SyntaxNode> Build(TableDef table)
-        {
-            var parameters = table.Columns.Aggregate(new List<SyntaxNode>(),
+            var parameters = table.Columns.Aggregate(new List<ParameterSyntax>(),
                 (seed, curr) =>
                 {
                     seed.Add(
-                        _generator.ParameterDeclaration(
-                            curr.Field,
-                            curr.Type.TypeExpression()));
+                        SyntaxFactory.Parameter(SyntaxFactory.ParseToken(curr.Field.ToCamelCase()))
+                            .WithType(SyntaxFactory.ParseTypeName(curr.Type.Name)));
                     return seed;
                 });
-
-            return parameters;
+            
+            return parameters.ToArray();
         }
     }
 }

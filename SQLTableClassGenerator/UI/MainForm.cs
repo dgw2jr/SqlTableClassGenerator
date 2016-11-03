@@ -49,17 +49,7 @@ namespace SQLTableClassGenerator.UI
 
             GenerateClass(e.Node.Level, e.Node.Name, e.Node.Parent.Name);
         }
-
-        private void checkBox_generateCtor_CheckedChanged(object sender, EventArgs e)
-        {
-            Settings.Default.GenerateConstructor = ((CheckBox)sender).Checked;
-
-            if (treeView1.SelectedNode == null)
-                return;
-
-            GenerateClass(treeView1.SelectedNode.Level, treeView1.SelectedNode.Name, treeView1.SelectedNode.Parent.Name);
-        }
-
+        
         private void GenerateClass(int nodeLevel, string name, string parentName)
         {
             if (nodeLevel == 0) return;
@@ -68,15 +58,32 @@ namespace SQLTableClassGenerator.UI
 
             richTextBox1.Text = _tableClassBuilder.Build(tableDef);
         }
-
-        private void checkBox_isSealed_CheckedChanged(object sender, EventArgs e)
+        
+        private void generateConstructorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Settings.Default.IsSealed = ((CheckBox)sender).Checked;
+            Settings.Default.GenerateConstructor = ((ToolStripMenuItem)sender).Checked;
 
             if (treeView1.SelectedNode == null)
                 return;
 
             GenerateClass(treeView1.SelectedNode.Level, treeView1.SelectedNode.Name, treeView1.SelectedNode.Parent.Name);
+
+        }
+
+        private void sealClassToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Settings.Default.IsSealed = ((ToolStripMenuItem)sender).Checked;
+
+            if (treeView1.SelectedNode == null)
+                return;
+
+            GenerateClass(treeView1.SelectedNode.Level, treeView1.SelectedNode.Name, treeView1.SelectedNode.Parent.Name);
+
+        }
+
+        private void splitContainer2_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

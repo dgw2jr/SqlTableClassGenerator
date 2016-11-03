@@ -30,23 +30,26 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.checkBox_isSealed = new System.Windows.Forms.CheckBox();
-            this.checkBox_generateCtor = new System.Windows.Forms.CheckBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.generateConstructorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sealClassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.richTextBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
+            this.toolStripContainer1.ContentPanel.SuspendLayout();
+            this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
+            this.toolStripContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Margin = new System.Windows.Forms.Padding(6);
             this.splitContainer1.Name = "splitContainer1";
@@ -57,9 +60,9 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1954, 1123);
-            this.splitContainer1.SplitterDistance = 650;
+            this.splitContainer1.Panel2.Controls.Add(this.richTextBox1);
+            this.splitContainer1.Size = new System.Drawing.Size(1954, 1083);
+            this.splitContainer1.SplitterDistance = 224;
             this.splitContainer1.SplitterWidth = 8;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -69,50 +72,67 @@
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Margin = new System.Windows.Forms.Padding(6);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(650, 1123);
+            this.treeView1.Size = new System.Drawing.Size(224, 1083);
             this.treeView1.TabIndex = 1;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
-            // splitContainer2
+            // menuStrip1
             // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Name = "splitContainer2";
-            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.optionsToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1954, 40);
+            this.menuStrip1.TabIndex = 2;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // splitContainer2.Panel1
+            // optionsToolStripMenuItem
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.checkBox_isSealed);
-            this.splitContainer2.Panel1.Controls.Add(this.checkBox_generateCtor);
+            this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.generateConstructorToolStripMenuItem,
+            this.sealClassToolStripMenuItem});
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(111, 38);
+            this.optionsToolStripMenuItem.Text = "Options";
             // 
-            // splitContainer2.Panel2
+            // generateConstructorToolStripMenuItem
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.richTextBox1);
-            this.splitContainer2.Size = new System.Drawing.Size(1296, 1123);
-            this.splitContainer2.SplitterDistance = 40;
-            this.splitContainer2.TabIndex = 1;
+            this.generateConstructorToolStripMenuItem.CheckOnClick = true;
+            this.generateConstructorToolStripMenuItem.Name = "generateConstructorToolStripMenuItem";
+            this.generateConstructorToolStripMenuItem.Size = new System.Drawing.Size(343, 38);
+            this.generateConstructorToolStripMenuItem.Text = "Generate Constructor";
+            this.generateConstructorToolStripMenuItem.Click += new System.EventHandler(this.generateConstructorToolStripMenuItem_Click);
             // 
-            // checkBox_isSealed
+            // sealClassToolStripMenuItem
             // 
-            this.checkBox_isSealed.AutoSize = true;
-            this.checkBox_isSealed.Location = new System.Drawing.Point(260, 12);
-            this.checkBox_isSealed.Name = "checkBox_isSealed";
-            this.checkBox_isSealed.Size = new System.Drawing.Size(111, 29);
-            this.checkBox_isSealed.TabIndex = 1;
-            this.checkBox_isSealed.Text = "Sealed";
-            this.checkBox_isSealed.UseVisualStyleBackColor = true;
-            this.checkBox_isSealed.CheckedChanged += new System.EventHandler(this.checkBox_isSealed_CheckedChanged);
+            this.sealClassToolStripMenuItem.CheckOnClick = true;
+            this.sealClassToolStripMenuItem.Name = "sealClassToolStripMenuItem";
+            this.sealClassToolStripMenuItem.Size = new System.Drawing.Size(343, 38);
+            this.sealClassToolStripMenuItem.Text = "Seal Class";
+            this.sealClassToolStripMenuItem.Click += new System.EventHandler(this.sealClassToolStripMenuItem_Click);
             // 
-            // checkBox_generateCtor
+            // toolStripContainer1
             // 
-            this.checkBox_generateCtor.AutoSize = true;
-            this.checkBox_generateCtor.Location = new System.Drawing.Point(3, 12);
-            this.checkBox_generateCtor.Name = "checkBox_generateCtor";
-            this.checkBox_generateCtor.Size = new System.Drawing.Size(250, 29);
-            this.checkBox_generateCtor.TabIndex = 0;
-            this.checkBox_generateCtor.Text = "Generate Constructor";
-            this.checkBox_generateCtor.UseVisualStyleBackColor = true;
-            this.checkBox_generateCtor.CheckedChanged += new System.EventHandler(this.checkBox_generateCtor_CheckedChanged);
+            this.toolStripContainer1.BottomToolStripPanelVisible = false;
+            // 
+            // toolStripContainer1.ContentPanel
+            // 
+            this.toolStripContainer1.ContentPanel.AutoScroll = true;
+            this.toolStripContainer1.ContentPanel.Controls.Add(this.splitContainer1);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1954, 1083);
+            this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.toolStripContainer1.LeftToolStripPanelVisible = false;
+            this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
+            this.toolStripContainer1.Name = "toolStripContainer1";
+            this.toolStripContainer1.RightToolStripPanelVisible = false;
+            this.toolStripContainer1.Size = new System.Drawing.Size(1954, 1123);
+            this.toolStripContainer1.TabIndex = 2;
+            this.toolStripContainer1.Text = "toolStripContainer1";
+            // 
+            // toolStripContainer1.TopToolStripPanel
+            // 
+            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.menuStrip1);
             // 
             // richTextBox1
             // 
@@ -123,8 +143,8 @@
             this.richTextBox1.Multiline = true;
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.richTextBox1.Size = new System.Drawing.Size(1296, 1079);
-            this.richTextBox1.TabIndex = 1;
+            this.richTextBox1.Size = new System.Drawing.Size(1722, 1083);
+            this.richTextBox1.TabIndex = 2;
             this.richTextBox1.WordWrap = false;
             // 
             // MainForm
@@ -132,21 +152,23 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1954, 1123);
-            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.toolStripContainer1);
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "MainForm";
             this.Text = "SQL Table Class Generator";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel1.PerformLayout();
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            this.splitContainer2.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
-            this.splitContainer2.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.toolStripContainer1.ContentPanel.ResumeLayout(false);
+            this.toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
+            this.toolStripContainer1.TopToolStripPanel.PerformLayout();
+            this.toolStripContainer1.ResumeLayout(false);
+            this.toolStripContainer1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -155,10 +177,12 @@
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem generateConstructorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sealClassToolStripMenuItem;
+        private System.Windows.Forms.ToolStripContainer toolStripContainer1;
         private System.Windows.Forms.TextBox richTextBox1;
-        private System.Windows.Forms.CheckBox checkBox_generateCtor;
-        private System.Windows.Forms.CheckBox checkBox_isSealed;
     }
 }
 
