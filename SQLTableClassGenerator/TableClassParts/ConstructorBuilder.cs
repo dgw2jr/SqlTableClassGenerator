@@ -4,7 +4,6 @@ using SQLTableClassGenerator.TableElements;
 using SQLTableClassGenerator.Properties;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System.Linq;
 
 namespace SQLTableClassGenerator.TableClassParts
 {

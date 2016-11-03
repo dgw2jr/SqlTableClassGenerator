@@ -78,12 +78,16 @@ namespace SQLTableClassGenerator.UI
                 return;
 
             GenerateClass(treeView1.SelectedNode.Level, treeView1.SelectedNode.Name, treeView1.SelectedNode.Parent.Name);
-
         }
 
-        private void splitContainer2_Panel1_Paint(object sender, PaintEventArgs e)
+        private void privateSettersToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Settings.Default.PrivateSetters = ((ToolStripMenuItem)sender).Checked;
 
+            if (treeView1.SelectedNode == null)
+                return;
+
+            GenerateClass(treeView1.SelectedNode.Level, treeView1.SelectedNode.Name, treeView1.SelectedNode.Parent.Name);
         }
     }
 }

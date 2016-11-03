@@ -4,6 +4,7 @@ using Microsoft.CodeAnalysis;
 using SQLTableClassGenerator.TableElements;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.CSharp;
+using SQLTableClassGenerator.Properties;
 
 namespace SQLTableClassGenerator.TableClassParts
 {
@@ -19,11 +20,15 @@ namespace SQLTableClassGenerator.TableClassParts
 
         private PropertyDeclarationSyntax GenerateProperty(ColumnDef c)
         {
+            var usePrivateSettersToken = Settings.Default.PrivateSetters ? SyntaxFactory.Token(SyntaxKind.PrivateKeyword) : SyntaxFactory.Token(SyntaxKind.BadToken);
             var prop = SyntaxFactory.PropertyDeclaration(SyntaxFactory.ParseTypeName(c.Type.Name), c.Field)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
                 .AddAccessorListAccessors(
-                    SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
-                    SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)));
+                    SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
+                        .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
+                    SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration)
+                        .AddModifiers(usePrivateSettersToken)
+                        .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)));
 
             return prop;
         }

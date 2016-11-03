@@ -30,12 +30,13 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
+            this.richTextBox1 = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generateConstructorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sealClassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.richTextBox1 = new System.Windows.Forms.TextBox();
+            this.privateSettersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -61,7 +62,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.richTextBox1);
-            this.splitContainer1.Size = new System.Drawing.Size(1954, 1083);
+            this.splitContainer1.Size = new System.Drawing.Size(1954, 1081);
             this.splitContainer1.SplitterDistance = 224;
             this.splitContainer1.SplitterWidth = 8;
             this.splitContainer1.TabIndex = 1;
@@ -72,9 +73,22 @@
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Margin = new System.Windows.Forms.Padding(6);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(224, 1083);
+            this.treeView1.Size = new System.Drawing.Size(224, 1081);
             this.treeView1.TabIndex = 1;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Font = new System.Drawing.Font("Consolas", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(6);
+            this.richTextBox1.Multiline = true;
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.richTextBox1.Size = new System.Drawing.Size(1722, 1081);
+            this.richTextBox1.TabIndex = 2;
+            this.richTextBox1.WordWrap = false;
             // 
             // menuStrip1
             // 
@@ -83,7 +97,7 @@
             this.optionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1954, 40);
+            this.menuStrip1.Size = new System.Drawing.Size(1954, 42);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -91,7 +105,8 @@
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.generateConstructorToolStripMenuItem,
-            this.sealClassToolStripMenuItem});
+            this.sealClassToolStripMenuItem,
+            this.privateSettersToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(111, 38);
             this.optionsToolStripMenuItem.Text = "Options";
@@ -120,7 +135,7 @@
             // 
             this.toolStripContainer1.ContentPanel.AutoScroll = true;
             this.toolStripContainer1.ContentPanel.Controls.Add(this.splitContainer1);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1954, 1083);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1954, 1081);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.LeftToolStripPanelVisible = false;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
@@ -134,18 +149,13 @@
             // 
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.menuStrip1);
             // 
-            // richTextBox1
+            // privateSettersToolStripMenuItem
             // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Font = new System.Drawing.Font("Consolas", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(6);
-            this.richTextBox1.Multiline = true;
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.richTextBox1.Size = new System.Drawing.Size(1722, 1083);
-            this.richTextBox1.TabIndex = 2;
-            this.richTextBox1.WordWrap = false;
+            this.privateSettersToolStripMenuItem.CheckOnClick = true;
+            this.privateSettersToolStripMenuItem.Name = "privateSettersToolStripMenuItem";
+            this.privateSettersToolStripMenuItem.Size = new System.Drawing.Size(343, 38);
+            this.privateSettersToolStripMenuItem.Text = "Private Setters";
+            this.privateSettersToolStripMenuItem.Click += new System.EventHandler(this.privateSettersToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -183,6 +193,7 @@
         private System.Windows.Forms.ToolStripMenuItem sealClassToolStripMenuItem;
         private System.Windows.Forms.ToolStripContainer toolStripContainer1;
         private System.Windows.Forms.TextBox richTextBox1;
+        private System.Windows.Forms.ToolStripMenuItem privateSettersToolStripMenuItem;
     }
 }
 

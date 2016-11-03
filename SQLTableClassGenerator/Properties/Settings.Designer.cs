@@ -46,5 +46,17 @@ namespace SQLTableClassGenerator.Properties {
                 this["IsSealed"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PrivateSetters {
+            get {
+                return ((bool)(this["PrivateSetters"]));
+            }
+            set {
+                this["PrivateSetters"] = value;
+            }
+        }
     }
 }
