@@ -35,8 +35,8 @@
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generateConstructorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sealClassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.privateSettersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -127,6 +127,14 @@
             this.sealClassToolStripMenuItem.Text = "Seal Class";
             this.sealClassToolStripMenuItem.Click += new System.EventHandler(this.sealClassToolStripMenuItem_Click);
             // 
+            // privateSettersToolStripMenuItem
+            // 
+            this.privateSettersToolStripMenuItem.CheckOnClick = true;
+            this.privateSettersToolStripMenuItem.Name = "privateSettersToolStripMenuItem";
+            this.privateSettersToolStripMenuItem.Size = new System.Drawing.Size(343, 38);
+            this.privateSettersToolStripMenuItem.Text = "Private Setters";
+            this.privateSettersToolStripMenuItem.Click += new System.EventHandler(this.privateSettersToolStripMenuItem_Click);
+            // 
             // toolStripContainer1
             // 
             this.toolStripContainer1.BottomToolStripPanelVisible = false;
@@ -148,14 +156,6 @@
             // toolStripContainer1.TopToolStripPanel
             // 
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.menuStrip1);
-            // 
-            // privateSettersToolStripMenuItem
-            // 
-            this.privateSettersToolStripMenuItem.CheckOnClick = true;
-            this.privateSettersToolStripMenuItem.Name = "privateSettersToolStripMenuItem";
-            this.privateSettersToolStripMenuItem.Size = new System.Drawing.Size(343, 38);
-            this.privateSettersToolStripMenuItem.Text = "Private Setters";
-            this.privateSettersToolStripMenuItem.Click += new System.EventHandler(this.privateSettersToolStripMenuItem_Click);
             // 
             // MainForm
             // 
