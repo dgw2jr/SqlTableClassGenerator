@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using SQLTableClassGenerator.TableClassParts.Interfaces;
 using SQLTableClassGenerator.TableElements;
 
 namespace SQLTableClassGenerator.TableClassParts
 {
-
     public sealed class RoslynTableClassBuilder : ITableClassBuilder
     {
         private readonly ClassBuilder _classBuilder;
@@ -31,5 +31,4 @@ namespace SQLTableClassGenerator.TableClassParts
                 .ToString();
         }
     }
-
 }

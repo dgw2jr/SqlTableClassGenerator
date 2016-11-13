@@ -1,70 +1,42 @@
 ﻿using System;
-using System.Data;
-using System.Linq;
 using System.Windows.Forms;
 using SQLTableClassGenerator.DataAccess;
+using SQLTableClassGenerator.Interfaces;
 
 namespace SQLTableClassGenerator.UI
 {
-    public class TreeViewPopulator : ITreeViewPopulator
+    public class TreeViewPopulator : IPopulator
     {
-        private readonly IConnectionHandler _connectionHandler;
+        private readonly IHasDatabases _databasesContainer;
+        private readonly TreeView _tree;
 
-        public TreeViewPopulator(IConnectionHandler connectionHandler)
+        public TreeViewPopulator(
+            IHasDatabases databasesContainer,
+            TreeView tree)
         {
-            _connectionHandler = connectionHandler;
+            _databasesContainer = databasesContainer;
+            _tree = tree;
         }
 
-        private void Add(TreeView tree, string Name)
+        private TreeNode Add(string Name)
         {
-            tree.Nodes.Add(Name, Name);
+            return _tree.Nodes.Add(Name, Name);
         }
 
-        private void Add(TreeView tree, string dbName, string tblName)
+        private TreeNode Add(string dbName, string tblName)
         {
-            tree.Nodes[dbName].Nodes.Add(tblName, tblName);
+            return _tree.Nodes[dbName].Nodes.Add(tblName, tblName);
         }
 
-        public void Populate(TreeView tree)
+        public void Populate()
         {
-            var blacklist = new[]
+            foreach (var database in _databasesContainer.Databases)
             {
-                "master",
-                "model",
-                "tempdb",
-                "msdb"
-            };
-
-            using (var conn = _connectionHandler.GetConnection())
-            {
-                conn.Open();
-
-                var databases = conn.GetSchema("Databases").AsEnumerable().OrderBy(o => o[0]);
-
-                foreach (var dbRow in databases.Where(row => !blacklist.Contains(row[0].ToString())))
+                _tree.Invoke(new Action(() => Add(database.Name)));
+                
+                foreach (var table in database.Tables)
                 {
-                    var dbName = dbRow[0].ToString();
-                    try
-                    {
-                        conn.ChangeDatabase(dbName);
-                    }
-                    catch (Exception exception)
-                    {
-                        continue;
-                    }
-
-                    var tables = conn.GetSchema("Tables").AsEnumerable().OrderBy(o => o[2]);
-
-                    // add database node
-                    tree.Invoke(new Action(() => Add(tree, dbName)));
-
-                    // add tables for database nodes
-                    foreach (DataRow row in tables)
-                    {
-                        var schema = row[1].ToString();
-                        var tableName = row[2].ToString();
-                        tree.Invoke(new Action(() => Add(tree, dbName, $"{schema}.{tableName}")));
-                    }
+                    _tree.Invoke(new Action(() => Add(database.Name, $"{table.Schema}.{table.Name}")));
                 }
             }
         }

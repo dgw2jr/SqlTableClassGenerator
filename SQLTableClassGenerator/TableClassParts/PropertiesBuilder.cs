@@ -5,6 +5,7 @@ using SQLTableClassGenerator.TableElements;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.CSharp;
 using SQLTableClassGenerator.Properties;
+using SQLTableClassGenerator.TableClassParts.Interfaces;
 
 namespace SQLTableClassGenerator.TableClassParts
 {
@@ -33,5 +34,4 @@ namespace SQLTableClassGenerator.TableClassParts
             return prop;
         }
     }
-
 }

@@ -6,14 +6,11 @@ namespace SQLTableClassGenerator.TableElements
     {
         public TableDef(string name, IEnumerable<ColumnDef> columnDefs)
         {
-            Name = name.Split('.')[1];
-            Schema = name.Split('.')[0];
+            Name = name;
             Columns = columnDefs;
         }
 
         public string Name { get; }
-
-        public string Schema { get; }
 
         public IEnumerable<ColumnDef> Columns { get; }
     }

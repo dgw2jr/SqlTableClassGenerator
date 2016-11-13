@@ -1,6 +1,6 @@
 ﻿using SQLTableClassGenerator.TableElements;
 
-namespace SQLTableClassGenerator.TableClassParts
+namespace SQLTableClassGenerator.TableClassParts.Interfaces
 {
     public interface ITableClassBuilder
     {

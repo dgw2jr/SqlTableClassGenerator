@@ -1,31 +1,39 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using SQLTableClassGenerator.DataAccess;
+using SQLTableClassGenerator.Interfaces;
 using SQLTableClassGenerator.Properties;
-using SQLTableClassGenerator.TableClassParts;
-using SQLTableClassGenerator.TableElements;
+using SQLTableClassGenerator.TableClassParts.Interfaces;
+using SQLTableClassGenerator.TableElements.Builders.Interfaces;
 
 namespace SQLTableClassGenerator.UI
 {
     public partial class MainForm : Form
     {
         private readonly IConnectionHandler _connectionHandler;
+        private readonly IHasDatabases _databasesContainer;
         private readonly ITableDefBuilder _tableDefBuilder;
         private readonly ITableClassBuilder _tableClassBuilder;
-        private readonly ITreeViewPopulator _treeViewPopulator;
+        private readonly IPopulator _treeViewPopulator;
 
         public MainForm(
-            IConnectionHandler connectionHandler, 
+            IConnectionHandler connectionHandler,
+            IHasDatabases databasesContainer,
             ITableDefBuilder tableDefBuilder,
             ITableClassBuilder tableClassBuilder,
-            ITreeViewPopulator treePopulator)
+            IPopulator treePopulator,
+            TreeView tree)
         {
-            InitializeComponent();
+            treeView1 = tree;
             _connectionHandler = connectionHandler;
+            _databasesContainer = databasesContainer;
             _tableDefBuilder = tableDefBuilder;
             _tableClassBuilder = tableClassBuilder;
             _treeViewPopulator = treePopulator;
+
+            InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -39,7 +47,7 @@ namespace SQLTableClassGenerator.UI
 
         private void bgw_DoWork(object sender, DoWorkEventArgs e)
         {
-            _treeViewPopulator.Populate(treeView1);
+            _treeViewPopulator.Populate();
         }
         
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -54,7 +62,13 @@ namespace SQLTableClassGenerator.UI
         {
             if (nodeLevel == 0) return;
 
-            var tableDef = _tableDefBuilder.Build(parentName, name);
+            var table = _databasesContainer
+                .Databases
+                .FirstOrDefault(db => db.Name == parentName)
+                .Tables
+                .FirstOrDefault(tbl => tbl.Name == name.Split('.')[1]);
+
+            var tableDef = _tableDefBuilder.Build(parentName, table);
 
             richTextBox1.Text = _tableClassBuilder.Build(tableDef);
         }

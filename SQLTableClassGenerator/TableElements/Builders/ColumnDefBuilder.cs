@@ -3,9 +3,9 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using SQLTableClassGenerator.DataAccess;
-using Microsoft.SqlServer.Types;
+using SQLTableClassGenerator.TableElements.Builders.Interfaces;
 
-namespace SQLTableClassGenerator.TableElements
+namespace SQLTableClassGenerator.TableElements.Builders
 {
     internal class ColumnDefBuilder : IColumnDefBuilder
     {
@@ -16,7 +16,7 @@ namespace SQLTableClassGenerator.TableElements
             _connectionHandler = connectionHandler;
         }
 
-        public IEnumerable<ColumnDef> Build(string databaseName, string tableName)
+        public IEnumerable<ColumnDef> Build(string databaseName, Table table)
         {
             using (var conn = _connectionHandler.GetConnection())
             {
@@ -24,10 +24,18 @@ namespace SQLTableClassGenerator.TableElements
                 conn.ChangeDatabase(databaseName);
 
                 var cmd = conn.CreateCommand() as SqlCommand;
-                cmd.CommandText = $"select top 0 * from {tableName}";
+                cmd.CommandText = $"select top 0 * from {table.Schema}.{table.Name}";
                 var dt = new DataTable();
                 var da = new SqlDataAdapter(cmd);
-                da.Fill(dt);
+
+                try
+                {
+                    da.Fill(dt);
+                }
+                catch
+                {
+                    return new List<ColumnDef>();
+                }
 
                 var columns = dt.Columns.Cast<DataColumn>().OrderBy(c => c.ColumnName);
 

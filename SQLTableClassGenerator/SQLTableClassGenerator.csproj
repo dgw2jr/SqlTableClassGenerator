@@ -111,21 +111,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess\DataAccessModule.cs" />
+    <Compile Include="DataAccess\ExcludedDatabaseNameCollection.cs" />
+    <Compile Include="DataAccess\IHasDatabases.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="TableClassParts\ConstructorBuilder.cs" />
     <Compile Include="TableClassParts\ClassBuilder.cs" />
-    <Compile Include="TableClassParts\IBuilderForTable.cs" />
+    <Compile Include="TableClassParts\Interfaces\IBuilderForTable.cs" />
     <Compile Include="TableClassParts\PropertiesBuilder.cs" />
     <Compile Include="TableClassParts\ConstructorParameterBuilder.cs" />
     <Compile Include="TableClassParts\RoslynTableClassBuilder.cs" />
     <Compile Include="TableClassParts\TableClassPartsModule.cs" />
     <Compile Include="TableElements\ColumnDef.cs" />
     <Compile Include="DataAccess\ConnectionHandler.cs" />
-    <Compile Include="TableClassParts\ITableClassBuilder.cs" />
-    <Compile Include="TableElements\ColumnDefBuilder.cs" />
-    <Compile Include="TableElements\IColumnDefBuilder.cs" />
-    <Compile Include="TableElements\ITableDefBuilder.cs" />
-    <Compile Include="UI\ITreeViewPopulator.cs" />
+    <Compile Include="TableClassParts\Interfaces\ITableClassBuilder.cs" />
+    <Compile Include="TableElements\Builders\DatabaseBuilder.cs" />
+    <Compile Include="TableElements\Builders\Interfaces\IColumnDefBuilder.cs" />
+    <Compile Include="TableElements\Builders\Interfaces\IDatabaseBuilder.cs" />
+    <Compile Include="TableElements\Builders\Interfaces\ITableDefBuilder.cs" />
+    <Compile Include="TableElements\Builders\ColumnDefBuilder.cs" />
+    <Compile Include="TableElements\Database.cs" />
+    <Compile Include="Interfaces\IPopulator.cs" />
     <Compile Include="UI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,8 +141,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TableElements\TableDef.cs" />
-    <Compile Include="TableElements\TableDefBuilder.cs" />
-    <Compile Include="TableElements\TableElementsModule.cs" />
+    <Compile Include="TableElements\Builders\TableDefBuilder.cs" />
+    <Compile Include="TableElements\Builders\TableElementsBuildersModule.cs" />
     <Compile Include="UI\TreeViewPopulator.cs" />
     <Compile Include="UI\UIModule.cs" />
     <EmbeddedResource Include="UI\MainForm.resx">

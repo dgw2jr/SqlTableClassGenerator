@@ -7,6 +7,7 @@ namespace SQLTableClassGenerator.UI
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<TreeView>().AsSelf().SingleInstance();
             builder.RegisterType<TreeViewPopulator>().AsImplementedInterfaces();
             builder.RegisterType<MainForm>().As<Form>();
         }
