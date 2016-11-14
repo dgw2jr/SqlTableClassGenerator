@@ -73,33 +73,34 @@ namespace SQLTableClassGenerator
             richTextBox1.Text = _classBuilder.Build(tableDef, Settings.Default);
         }
 
-        private void GenerateClass(TreeView treeView)
+        private void GenerateClass(TreeNode node)
         {
-            if (treeView.SelectedNode == null)
+            if (node == null)
                 return;
 
-            GenerateClass(treeView.SelectedNode.Level, treeView.SelectedNode.Name, treeView.SelectedNode.Parent.Name);
+            GenerateClass(node.Level, node.Name, node.Parent.Name);
         }
         
         private void generateConstructorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Execute(() => Settings.Default.GenerateConstructor = ((ToolStripMenuItem)sender).Checked);
+            GenerateClassWithActions(() => Settings.Default.GenerateConstructor = ((ToolStripMenuItem)sender).Checked);
         }
 
         private void sealClassToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Execute(() => Settings.Default.IsSealed = ((ToolStripMenuItem)sender).Checked);
+            GenerateClassWithActions(() => Settings.Default.IsSealed = ((ToolStripMenuItem)sender).Checked);
         }
 
         private void privateSettersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Execute(() => Settings.Default.PrivateSetters = ((ToolStripMenuItem)sender).Checked);
+            GenerateClassWithActions(() => Settings.Default.PrivateSetters = ((ToolStripMenuItem)sender).Checked);
         }
 
-        private void Execute(Action action)
+        private void GenerateClassWithActions(Action preAction = null, Action postAction = null)
         {
-            action();
-            GenerateClass(treeView1);
+            preAction?.Invoke();
+            GenerateClass(treeView1.SelectedNode);
+            postAction?.Invoke();
         }
     }
 }
