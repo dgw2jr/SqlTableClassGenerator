@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using ClassGeneration.ModelBuilders;
 
-namespace SQLTableClassGenerator
+namespace SQLTableClassGenerator.Modules
 {
     internal class ModelBuildersModule : Module
     {

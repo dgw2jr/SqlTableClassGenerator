@@ -2,7 +2,7 @@
 using DataAccess;
 using Repositories;
 
-namespace SQLTableClassGenerator
+namespace SQLTableClassGenerator.Modules
 {
     internal class DataAccessModule : Module
     {

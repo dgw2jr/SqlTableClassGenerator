@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using ClassGeneration;
 
-namespace SQLTableClassGenerator
+namespace SQLTableClassGenerator.Modules
 {
     internal class BaseModule : Module
     {
