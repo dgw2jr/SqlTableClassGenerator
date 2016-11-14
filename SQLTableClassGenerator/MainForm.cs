@@ -27,7 +27,7 @@ namespace SQLTableClassGenerator
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
             _connectionHandler.SetConnection();
 
