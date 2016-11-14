@@ -13,6 +13,10 @@ namespace SQLTableClassGenerator.DataAccess
             builder.RegisterType<ConnectionHandler>()
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
+
+            builder.RegisterType<DatabaseRepository>()
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
         }
     }
 }

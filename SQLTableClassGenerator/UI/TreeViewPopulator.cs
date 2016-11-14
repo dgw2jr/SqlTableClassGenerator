@@ -1,42 +1,33 @@
 ﻿using System;
 using System.Windows.Forms;
-using SQLTableClassGenerator.DataAccess;
+using ClassGeneration.Interfaces;
+using ClassGeneration.Models;
 using SQLTableClassGenerator.Interfaces;
 
 namespace SQLTableClassGenerator.UI
 {
     public class TreeViewPopulator : IPopulator
     {
-        private readonly IHasDatabases _databasesContainer;
+        private readonly IRepository<Database> _databaseRepository;
         private readonly TreeView _tree;
 
         public TreeViewPopulator(
-            IHasDatabases databasesContainer,
+            IRepository<Database> databaseRepository,
             TreeView tree)
         {
-            _databasesContainer = databasesContainer;
+            _databaseRepository = databaseRepository;
             _tree = tree;
-        }
-
-        private TreeNode Add(string Name)
-        {
-            return _tree.Nodes.Add(Name, Name);
-        }
-
-        private TreeNode Add(string dbName, string tblName)
-        {
-            return _tree.Nodes[dbName].Nodes.Add(tblName, tblName);
         }
 
         public void Populate()
         {
-            foreach (var database in _databasesContainer.Databases)
+            foreach (var database in _databaseRepository.All())
             {
-                _tree.Invoke(new Action(() => Add(database.Name)));
+                _tree.Invoke(new Action(() => _tree.Nodes.Add(database.Name, database.Name)));
                 
                 foreach (var table in database.Tables)
                 {
-                    _tree.Invoke(new Action(() => Add(database.Name, $"{table.Schema}.{table.Name}")));
+                    _tree.Invoke(new Action(() => _tree.Nodes[database.Name].Nodes.Add(table.NameWithSchemaPrefix, table.NameWithSchemaPrefix)));
                 }
             }
         }

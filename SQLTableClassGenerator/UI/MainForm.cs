@@ -2,35 +2,34 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
-using SQLTableClassGenerator.DataAccess;
+using ClassGeneration.Interfaces;
+using ClassGeneration.Models;
 using SQLTableClassGenerator.Interfaces;
-using SQLTableClassGenerator.Properties;
-using SQLTableClassGenerator.TableClassParts.Interfaces;
-using SQLTableClassGenerator.TableElements.Builders.Interfaces;
+using ClassGeneration.Properties;
 
 namespace SQLTableClassGenerator.UI
 {
     public partial class MainForm : Form
     {
         private readonly IConnectionHandler _connectionHandler;
-        private readonly IHasDatabases _databasesContainer;
-        private readonly ITableDefBuilder _tableDefBuilder;
-        private readonly ITableClassBuilder _tableClassBuilder;
+        private readonly IRepository<Database> _databaseRepository;
+        private readonly IBuilder<Table, Table> _tableBuilder;
+        private readonly IClassBuilder<Table> _classBuilder;
         private readonly IPopulator _treeViewPopulator;
 
         public MainForm(
             IConnectionHandler connectionHandler,
-            IHasDatabases databasesContainer,
-            ITableDefBuilder tableDefBuilder,
-            ITableClassBuilder tableClassBuilder,
+            IRepository<Database> databaseRepository,
+            IBuilder<Table, Table> tableBuilder,
+            IClassBuilder<Table> classBuilder,
             IPopulator treePopulator,
             TreeView tree)
         {
             treeView1 = tree;
             _connectionHandler = connectionHandler;
-            _databasesContainer = databasesContainer;
-            _tableDefBuilder = tableDefBuilder;
-            _tableClassBuilder = tableClassBuilder;
+            _databaseRepository = databaseRepository;
+            _tableBuilder = tableBuilder;
+            _classBuilder = classBuilder;
             _treeViewPopulator = treePopulator;
 
             InitializeComponent();
@@ -62,15 +61,15 @@ namespace SQLTableClassGenerator.UI
         {
             if (nodeLevel == 0) return;
 
-            var table = _databasesContainer
-                .Databases
+            var table = _databaseRepository
+                .All()
                 .FirstOrDefault(db => db.Name == parentName)
                 .Tables
                 .FirstOrDefault(tbl => tbl.Name == name.Split('.')[1]);
 
-            var tableDef = _tableDefBuilder.Build(parentName, table);
+            var tableDef = _tableBuilder.Build(parentName, table);
 
-            richTextBox1.Text = _tableClassBuilder.Build(tableDef);
+            richTextBox1.Text = _classBuilder.Build(tableDef, Settings.Default);
         }
 
         private void GenerateClass(TreeView treeView)
