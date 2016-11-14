@@ -69,7 +69,7 @@
   <ItemGroup>
     <Compile Include="Modules\DataAccessModule.cs" />
     <Compile Include="Interfaces\IPopulator.cs" />
-    <Compile Include="Modules\BaseModule.cs" />
+    <Compile Include="Modules\ClassGenerationModule.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -3,7 +3,7 @@ using ClassGeneration;
 
 namespace SQLTableClassGenerator.Modules
 {
-    internal class BaseModule : Module
+    internal class ClassGenerationModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
