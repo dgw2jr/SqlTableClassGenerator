@@ -9,6 +9,7 @@ namespace SQLTableClassGenerator.Modules
         {
             builder.RegisterType<TreeView>().AsSelf().SingleInstance();
             builder.RegisterType<TreeViewPopulator>().AsImplementedInterfaces();
+            builder.RegisterType<TreeNodeClassGenerator>().AsImplementedInterfaces();
             builder.RegisterType<MainForm>().As<Form>();
         }
     }

@@ -67,6 +67,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TreeNodeClassGenerator.cs" />
+    <Compile Include="Interfaces\ITreeNodeClassGenerator.cs" />
     <Compile Include="Modules\DataAccessModule.cs" />
     <Compile Include="Interfaces\IPopulator.cs" />
     <Compile Include="Modules\ClassGenerationModule.cs" />
