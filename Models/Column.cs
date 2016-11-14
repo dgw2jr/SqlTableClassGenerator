@@ -1,6 +1,6 @@
 using System;
 
-namespace ClassGeneration.Models
+namespace Models
 {
     public class Column
     {

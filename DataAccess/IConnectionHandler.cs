@@ -1,6 +1,6 @@
 ﻿using System.Data.Common;
 
-namespace SQLTableClassGenerator.Interfaces
+namespace DataAccess
 {
     public interface IConnectionHandler
     {

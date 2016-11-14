@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ClassGeneration.Interfaces
+namespace DataAccess
 {
     public interface IRepository<T>
     {

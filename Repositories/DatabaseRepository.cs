@@ -2,10 +2,10 @@
 using System.Data;
 using System.Linq;
 using ClassGeneration.Interfaces;
-using ClassGeneration.Models;
-using SQLTableClassGenerator.Interfaces;
+using DataAccess;
+using Models;
 
-namespace SQLTableClassGenerator.DataAccess
+namespace Repositories
 {
     public class DatabaseRepository : IRepository<Database>
     {

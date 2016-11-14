@@ -2,8 +2,8 @@ using System.Linq;
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using ClassGeneration.Interfaces;
-using ClassGeneration.Models;
 using ClassGeneration.Properties;
+using Models;
 
 namespace ClassGeneration
 {

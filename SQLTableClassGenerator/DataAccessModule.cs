@@ -1,6 +1,8 @@
 ﻿using Autofac;
+using DataAccess;
+using Repositories;
 
-namespace SQLTableClassGenerator.DataAccess
+namespace SQLTableClassGenerator
 {
     internal class DataAccessModule : Module
     {

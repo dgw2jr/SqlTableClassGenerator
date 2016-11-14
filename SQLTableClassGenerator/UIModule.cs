@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using Autofac;
 
-namespace SQLTableClassGenerator.UI
+namespace SQLTableClassGenerator
 {
     internal class UIModule : Module
     {

@@ -2,9 +2,9 @@
 using System.Data.Common;
 using System.Linq;
 using ClassGeneration.Interfaces;
-using ClassGeneration.Models;
+using Models;
 
-namespace SQLTableClassGenerator.ModelBuilders
+namespace ClassGeneration.ModelBuilders
 {
     public class DatabaseBuilder : IDatabaseBuilder<Database>
     {
@@ -16,7 +16,8 @@ namespace SQLTableClassGenerator.ModelBuilders
                 .GetSchema("Tables")
                 .AsEnumerable()
                 .OrderBy(o => o[2])
-                .Select(table => new Table(table.Field<string>("table_name"), table.Field<string>("table_schema")))
+                .Select(table => 
+                    new Table(databaseName, table.Field<string>("table_name"), table.Field<string>("table_schema")))
                 .ToList();
 
             return new Database(databaseName, tables);

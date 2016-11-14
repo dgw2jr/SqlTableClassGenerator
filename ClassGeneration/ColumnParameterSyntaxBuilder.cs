@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis;
-using ClassGeneration.Models;
 using ClassGeneration.Interfaces;
+using Models;
 
 namespace ClassGeneration
 {

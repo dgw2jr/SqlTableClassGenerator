@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Editing;
 using ClassGeneration.Interfaces;
-using ClassGeneration.Models;
 using ClassGeneration.Properties;
+using Models;
 
 namespace ClassGeneration
 {

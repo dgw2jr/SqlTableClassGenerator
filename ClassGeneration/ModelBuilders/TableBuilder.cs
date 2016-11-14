@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using ClassGeneration.Interfaces;
-using ClassGeneration.Models;
+using Models;
 
-namespace SQLTableClassGenerator.ModelBuilders
+namespace ClassGeneration.ModelBuilders
 {
-    internal class TableBuilder : IBuilder<Table, Table>
+    public class TableBuilder : IBuilder<Table, Table>
     {
         private readonly IBuilder<Table, IEnumerable<Column>> _columnBuilder;
 
@@ -13,9 +13,9 @@ namespace SQLTableClassGenerator.ModelBuilders
             _columnBuilder = columnBuilder;
         }
 
-        public Table Build(string databaseName, Table table)
+        public Table Build(Table table)
         {
-            var columns = _columnBuilder.Build(databaseName, table);
+            var columns = _columnBuilder.Build(table);
 
             return new Table(table, columns);
         }

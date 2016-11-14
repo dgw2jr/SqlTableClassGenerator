@@ -2,9 +2,8 @@
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using SQLTableClassGenerator.Interfaces;
 
-namespace SQLTableClassGenerator.DataAccess
+namespace DataAccess
 {
     public class ConnectionHandler : IConnectionHandler
     {

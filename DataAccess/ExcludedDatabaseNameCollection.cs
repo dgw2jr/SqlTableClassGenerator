@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace SQLTableClassGenerator.DataAccess
+namespace DataAccess
 {
     public class ExcludedDatabaseNameCollection : Collection<string>
     {

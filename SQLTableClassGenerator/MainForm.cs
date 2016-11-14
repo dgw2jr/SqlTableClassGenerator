@@ -3,11 +3,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using ClassGeneration.Interfaces;
-using ClassGeneration.Models;
 using SQLTableClassGenerator.Interfaces;
 using ClassGeneration.Properties;
+using DataAccess;
+using Models;
 
-namespace SQLTableClassGenerator.UI
+namespace SQLTableClassGenerator
 {
     public partial class MainForm : Form
     {
@@ -67,7 +68,7 @@ namespace SQLTableClassGenerator.UI
                 .Tables
                 .FirstOrDefault(tbl => tbl.Name == name.Split('.')[1]);
 
-            var tableDef = _tableBuilder.Build(parentName, table);
+            var tableDef = _tableBuilder.Build(table);
 
             richTextBox1.Text = _classBuilder.Build(tableDef, Settings.Default);
         }

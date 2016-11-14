@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
-using ClassGeneration.Interfaces;
-using ClassGeneration.Models;
+using DataAccess;
+using Models;
 using SQLTableClassGenerator.Interfaces;
 
-namespace SQLTableClassGenerator.UI
+namespace SQLTableClassGenerator
 {
     public class TreeViewPopulator : IPopulator
     {

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using ClassGeneration.Interfaces;
-using ClassGeneration.Models;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Models;
 
 namespace ClassGeneration
 {

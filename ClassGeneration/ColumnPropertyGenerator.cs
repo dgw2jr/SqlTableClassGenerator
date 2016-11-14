@@ -1,8 +1,8 @@
 ﻿using ClassGeneration.Interfaces;
-using ClassGeneration.Models;
 using ClassGeneration.Properties;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Models;
 
 namespace ClassGeneration
 {

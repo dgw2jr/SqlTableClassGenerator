@@ -3,12 +3,12 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using ClassGeneration.Interfaces;
-using ClassGeneration.Models;
-using SQLTableClassGenerator.Interfaces;
+using DataAccess;
+using Models;
 
-namespace SQLTableClassGenerator.ModelBuilders
+namespace ClassGeneration.ModelBuilders
 {
-    internal class ColumnBuilder : IBuilder<Table, IEnumerable<Column>>
+    public class ColumnBuilder : IBuilder<Table, IEnumerable<Column>>
     {
         private readonly IConnectionHandler _connectionHandler;
 
@@ -17,12 +17,12 @@ namespace SQLTableClassGenerator.ModelBuilders
             _connectionHandler = connectionHandler;
         }
 
-        public IEnumerable<Column> Build(string databaseName, Table table)
+        public IEnumerable<Column> Build(Table table)
         {
             using (var conn = _connectionHandler.GetConnection())
             {
                 conn.Open();
-                conn.ChangeDatabase(databaseName);
+                conn.ChangeDatabase(table.DatabaseName);
 
                 var cmd = conn.CreateCommand() as SqlCommand;
                 cmd.CommandText = $"select top 0 * from {table.Schema}.{table.Name}";
