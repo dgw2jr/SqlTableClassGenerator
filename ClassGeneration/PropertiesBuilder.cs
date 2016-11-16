@@ -4,14 +4,15 @@ using Microsoft.CodeAnalysis;
 using ClassGeneration.Interfaces;
 using ClassGeneration.Properties;
 using Models;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace ClassGeneration
 {
-    public sealed class PropertiesBuilder : ISyntaxNodesBuilder<Table>
+    public sealed class PropertiesBuilder : IBuilder<Table, IEnumerable<SyntaxNode>>
     {
-        private readonly IPropertyGenerator<Column> _columnPropertyGenerator;
+        private readonly IBuilder<Column, PropertyDeclarationSyntax> _columnPropertyGenerator;
 
-        public PropertiesBuilder(IPropertyGenerator<Column> columnPropertyGenerator)
+        public PropertiesBuilder(IBuilder<Column, PropertyDeclarationSyntax> columnPropertyGenerator)
         {
             _columnPropertyGenerator = columnPropertyGenerator;
         }
@@ -19,7 +20,7 @@ namespace ClassGeneration
         public IEnumerable<SyntaxNode> Build(Table table, Settings settings)
         {
             var props = table.Columns.Select(c =>
-                _columnPropertyGenerator.Generate(c, settings)).ToList();
+                _columnPropertyGenerator.Build(c, settings)).ToList();
 
             return props;
         }

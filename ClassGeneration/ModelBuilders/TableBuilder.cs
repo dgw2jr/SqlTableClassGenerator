@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using ClassGeneration.Interfaces;
+using ClassGeneration.Properties;
 using Models;
 
 namespace ClassGeneration.ModelBuilders
@@ -13,7 +14,7 @@ namespace ClassGeneration.ModelBuilders
             _columnBuilder = columnBuilder;
         }
 
-        public Table Build(Table table)
+        public Table Build(Table table, Settings settings)
         {
             var columns = _columnBuilder.Build(table);
 

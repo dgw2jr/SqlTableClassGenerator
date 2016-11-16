@@ -11,18 +11,18 @@ namespace SQLTableClassGenerator
 {
     public class TreeNodeClassGenerator : ITreeNodeClassGenerator
     {
-        private readonly IClassBuilder<Table> _classBuilder;
+        private readonly IBuilder<Table, string> _classStringBuilder;
         private readonly IRepository<Database> _databaseRepository;
         private readonly IBuilder<Table, Table> _tableBuilder;
 
         public TreeNodeClassGenerator(
             IRepository<Database> databaseRepository,
             IBuilder<Table, Table> tableBuilder,
-            IClassBuilder<Table> classBuilder)
+            IBuilder<Table, string> classStringBuilder)
         {
             _databaseRepository = databaseRepository;
             _tableBuilder = tableBuilder;
-            _classBuilder = classBuilder;
+            _classStringBuilder = classStringBuilder;
         }
 
         public string Generate(TreeNode node, Action preAction = null)
@@ -49,7 +49,7 @@ namespace SQLTableClassGenerator
 
             var tableDef = _tableBuilder.Build(table);
 
-            return _classBuilder.Build(tableDef, Settings.Default);
+            return _classStringBuilder.Build(tableDef, Settings.Default);
         }
     }
 }

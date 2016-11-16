@@ -4,37 +4,35 @@ using Microsoft.CodeAnalysis.Editing;
 using ClassGeneration.Interfaces;
 using ClassGeneration.Properties;
 using Models;
+using System.Linq;
 
 namespace ClassGeneration
 {
-    public sealed class TableSyntaxNodeBuilder : ISyntaxNodeBuilder<Table>
+    public sealed class ClassDeclarationBuilder<TIn> : IBuilder<TIn, SyntaxNode> where TIn : IHasName
     {
         private readonly SyntaxGenerator _generator;
-        private IEnumerable<SyntaxNode> _members;
+        private readonly IEnumerable<IBuilder<TIn, IEnumerable<SyntaxNode>>> _memberBuilders;
 
-        public TableSyntaxNodeBuilder()
+        public ClassDeclarationBuilder(IEnumerable<IBuilder<TIn, IEnumerable<SyntaxNode>>> memberBuilders)
         {
             var _ = typeof(Microsoft.CodeAnalysis.CSharp.Formatting.CSharpFormattingOptions);
             _generator = SyntaxGenerator.GetGenerator(new AdhocWorkspace(), LanguageNames.CSharp);
+
+            _memberBuilders = memberBuilders;
         }
 
-        public SyntaxNode Build(Table table, Settings settings)
+        public SyntaxNode Build(TIn obj, Settings settings)
         {
             var modifiers = settings.IsSealed ? DeclarationModifiers.Sealed : DeclarationModifiers.None;
+            var members = _memberBuilders.SelectMany(b => b.Build(obj, settings)).ToList();
 
             var classDeclaration = _generator.ClassDeclaration(
-                table.Name, 
+                obj.Name, 
                 modifiers: modifiers, 
-                members: _members,
+                members: members,
                 accessibility: Accessibility.Public);
 
             return classDeclaration;
-        }
-
-        public ISyntaxNodeBuilder<Table> WithMembers(IEnumerable<SyntaxNode> members)
-        {
-            _members = members;
-            return this;
         }
     }
 }

@@ -1,30 +1,21 @@
-using System.Collections.Generic;
-using System.Linq;
 using ClassGeneration.Interfaces;
 using ClassGeneration.Properties;
 using Microsoft.CodeAnalysis;
 
 namespace ClassGeneration
 {
-    public sealed class RoslynClassBuilder<T> : IClassBuilder<T>
+    public sealed class RoslynClassBuilder<T> : IBuilder<T, string>
     {
-        private readonly ISyntaxNodeBuilder<T> _classBuilder;
-        private readonly IEnumerable<ISyntaxNodesBuilder<T>> _memberBuilders;
+        private readonly IBuilder<T, SyntaxNode> _nodeBuilder;
 
-        public RoslynClassBuilder(
-            ISyntaxNodeBuilder<T> classBuilder,
-            IEnumerable<ISyntaxNodesBuilder<T>> memberBuilders)
+        public RoslynClassBuilder(IBuilder<T, SyntaxNode> nodeBuilder)
         {
-            _classBuilder = classBuilder;
-            _memberBuilders = memberBuilders;
+            _nodeBuilder = nodeBuilder;
         }
 
         public string Build(T obj, Settings settings)
         {
-            var members = _memberBuilders.SelectMany(b => b.Build(obj, settings)).ToList();
-
-            return _classBuilder
-                .WithMembers(members)
+            return _nodeBuilder
                 .Build(obj, settings)
                 .NormalizeWhitespace()
                 .GetText()

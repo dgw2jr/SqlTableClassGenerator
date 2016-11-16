@@ -8,12 +8,12 @@ namespace SQLTableClassGenerator.Modules
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterGeneric(typeof(RoslynClassBuilder<>)).AsImplementedInterfaces();
-            builder.RegisterType<BlockStatementListGenerator>().AsImplementedInterfaces();
+            builder.RegisterGeneric(typeof(ClassDeclarationBuilder<>)).AsImplementedInterfaces();
+            builder.RegisterType<ColumnPropertiesAssignmentBlockBuilder>().AsImplementedInterfaces();
             builder.RegisterType<ColumnParameterSyntaxBuilder>().AsImplementedInterfaces();
-            builder.RegisterType<ColumnPropertyGenerator>().AsImplementedInterfaces();
+            builder.RegisterType<ColumnPropertyBuilder>().AsImplementedInterfaces();
             builder.RegisterType<ConstructorBuilder>().AsImplementedInterfaces();
             builder.RegisterType<PropertiesBuilder>().AsImplementedInterfaces();
-            builder.RegisterType<TableSyntaxNodeBuilder>().AsImplementedInterfaces();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using ClassGeneration.Interfaces;
+using ClassGeneration.Properties;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -7,9 +8,9 @@ using Models;
 
 namespace ClassGeneration
 {
-    public class BlockStatementListGenerator : IBlockStatementListGenerator<IEnumerable<Column>>
+    public class ColumnPropertiesAssignmentBlockBuilder : IBuilder<IEnumerable<Column>, SyntaxList<StatementSyntax>>
     {
-        public SyntaxList<StatementSyntax> Generate(IEnumerable<Column> columns)
+        public SyntaxList<StatementSyntax> Build(IEnumerable<Column> columns, Settings settings)
         {
             var seed = SyntaxFactory.List<StatementSyntax>();
 

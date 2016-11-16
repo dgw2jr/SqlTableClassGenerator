@@ -162,21 +162,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlockStatementListGenerator.cs" />
+    <Compile Include="ColumnPropertiesAssignmentBlockBuilder.cs" />
     <Compile Include="ColumnParameterSyntaxBuilder.cs" />
-    <Compile Include="ColumnPropertyGenerator.cs" />
+    <Compile Include="ColumnPropertyBuilder.cs" />
     <Compile Include="ConstructorBuilder.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="Interfaces\IBlockStatementListGenerator.cs" />
     <Compile Include="Interfaces\IBuilder.cs" />
-    <Compile Include="Interfaces\IClassBuilder.cs" />
-    <Compile Include="Interfaces\IDatabaseBuilder.cs" />
-    <Compile Include="Interfaces\IParameterSyntaxBuilder.cs" />
-    <Compile Include="Interfaces\IPropertyGenerator.cs" />
-    <Compile Include="Interfaces\ISyntaxNodeBuilder.cs" />
-    <Compile Include="Interfaces\ISyntaxNodesBuilder.cs" />
     <Compile Include="ModelBuilders\ColumnBuilder.cs" />
-    <Compile Include="ModelBuilders\DatabaseBuilder.cs" />
     <Compile Include="ModelBuilders\TableBuilder.cs" />
     <Compile Include="PropertiesBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -186,7 +178,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="RoslynClassBuilder.cs" />
-    <Compile Include="TableSyntaxNodeBuilder.cs" />
+    <Compile Include="ClassDeclarationBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -202,7 +194,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
-      <Project>{FE86F4FB-1FC2-4D58-A18D-48A11D7C062D}</Project>
+      <Project>{fe86f4fb-1fc2-4d58-a18d-48a11d7c062d}</Project>
       <Name>DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">

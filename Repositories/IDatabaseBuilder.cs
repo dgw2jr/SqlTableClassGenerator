@@ -1,6 +1,6 @@
 ﻿using System.Data.Common;
 
-namespace ClassGeneration.Interfaces
+namespace Repositories
 {
     public interface IDatabaseBuilder<out TOut>
     {

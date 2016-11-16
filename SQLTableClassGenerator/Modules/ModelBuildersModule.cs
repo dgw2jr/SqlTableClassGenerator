@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using ClassGeneration.ModelBuilders;
+using Repositories;
 
 namespace SQLTableClassGenerator.Modules
 {

@@ -2,7 +2,7 @@
 
 namespace Models
 {
-    public class Table
+    public class Table : IHasName
     {
         public Table(string databaseName, string name, string schema)
         {

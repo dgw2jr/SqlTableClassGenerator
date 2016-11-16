@@ -10,14 +10,8 @@ namespace Models
             Field = columnName;
         }
 
-        public Type Type
-        {
-            get;
-        }
+        public Type Type { get; }
 
-        public string Field
-        {
-            get;
-        }
+        public string Field { get; }
     }
 }

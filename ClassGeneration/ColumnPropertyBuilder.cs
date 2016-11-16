@@ -6,9 +6,9 @@ using Models;
 
 namespace ClassGeneration
 {
-    public class ColumnPropertyGenerator : IPropertyGenerator<Column>
+    public class ColumnPropertyBuilder : IBuilder<Column, PropertyDeclarationSyntax>
     {
-        public PropertyDeclarationSyntax Generate(Column c, Settings settings)
+        public PropertyDeclarationSyntax Build(Column c, Settings settings)
         {
             var usePrivateSettersToken = settings.PrivateSetters ? SyntaxFactory.Token(SyntaxKind.PrivateKeyword) : SyntaxFactory.Token(SyntaxKind.BadToken);
 

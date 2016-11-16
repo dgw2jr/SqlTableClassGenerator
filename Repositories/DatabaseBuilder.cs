@@ -1,10 +1,9 @@
 ﻿using System.Data;
 using System.Data.Common;
 using System.Linq;
-using ClassGeneration.Interfaces;
 using Models;
 
-namespace ClassGeneration.ModelBuilders
+namespace Repositories
 {
     public class DatabaseBuilder : IDatabaseBuilder<Database>
     {
