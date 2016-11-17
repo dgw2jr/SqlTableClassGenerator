@@ -1,9 +1,7 @@
-﻿using ClassGeneration.Properties;
-
-namespace ClassGeneration.Interfaces
+﻿namespace ClassGeneration.Interfaces
 {
     public interface IBuilder<in TIn, out TOut>
     {
-        TOut Build(TIn obj, Settings settings = null);
+        TOut Build(TIn obj);
     }
 }

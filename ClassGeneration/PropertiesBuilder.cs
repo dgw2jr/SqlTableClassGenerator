@@ -2,13 +2,12 @@ using System.Linq;
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using ClassGeneration.Interfaces;
-using ClassGeneration.Properties;
 using Models;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace ClassGeneration
 {
-    public sealed class PropertiesBuilder : IBuilder<Table, IEnumerable<SyntaxNode>>
+    public sealed class PropertiesBuilder : ISyntaxNodesBuilder<Table>
     {
         private readonly IBuilder<Column, PropertyDeclarationSyntax> _columnPropertyGenerator;
 
@@ -17,10 +16,10 @@ namespace ClassGeneration
             _columnPropertyGenerator = columnPropertyGenerator;
         }
 
-        public IEnumerable<SyntaxNode> Build(Table table, Settings settings)
+        public IEnumerable<SyntaxNode> Build(Table table)
         {
             var props = table.Columns.Select(c =>
-                _columnPropertyGenerator.Build(c, settings)).ToList();
+                _columnPropertyGenerator.Build(c)).ToList();
 
             return props;
         }

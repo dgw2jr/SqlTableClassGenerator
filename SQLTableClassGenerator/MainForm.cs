@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 using SQLTableClassGenerator.Interfaces;
-using ClassGeneration.Properties;
+using SQLTableClassGenerator.Properties;
 using DataAccess;
 
 namespace SQLTableClassGenerator
@@ -46,22 +46,27 @@ namespace SQLTableClassGenerator
             if (e.Node.Parent == null || e.Node.Level == 0)
                 return;
 
-            richTextBox1.Text = _treeNodeClassGenerator.Generate(e.Node.Name, e.Node.Parent.Name);
+            SetTextBoxText();
         }
         
         private void generateConstructorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text = _treeNodeClassGenerator.Generate(treeView1.SelectedNode, () => Settings.Default.GenerateConstructor = ((ToolStripMenuItem)sender).Checked);
+            SetTextBoxText(() => Settings.Default.GenerateConstructor = ((ToolStripMenuItem)sender).Checked);
         }
 
         private void sealClassToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text = _treeNodeClassGenerator.Generate(treeView1.SelectedNode, () => Settings.Default.IsSealed = ((ToolStripMenuItem)sender).Checked);
+            SetTextBoxText(() => Settings.Default.IsSealed = ((ToolStripMenuItem)sender).Checked);
         }
 
         private void privateSettersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text = _treeNodeClassGenerator.Generate(treeView1.SelectedNode, () => Settings.Default.PrivateSetters = ((ToolStripMenuItem)sender).Checked);
+            SetTextBoxText(() => Settings.Default.PrivateSetters = ((ToolStripMenuItem)sender).Checked);
+        }
+
+        private void SetTextBoxText(Action action = null)
+        {
+            richTextBox1.Text = _treeNodeClassGenerator.Generate(treeView1.SelectedNode, action);
         }
     }
 }

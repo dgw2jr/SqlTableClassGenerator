@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Windows.Forms;
 using ClassGeneration.Interfaces;
-using ClassGeneration.Properties;
 using DataAccess;
 using Models;
 using SQLTableClassGenerator.Interfaces;
@@ -11,14 +10,14 @@ namespace SQLTableClassGenerator
 {
     public class TreeNodeClassGenerator : ITreeNodeClassGenerator
     {
-        private readonly IBuilder<Table, string> _classStringBuilder;
+        private readonly Func<IBuilder<Table, string>> _classStringBuilder;
         private readonly IRepository<Database> _databaseRepository;
         private readonly IBuilder<Table, Table> _tableBuilder;
 
         public TreeNodeClassGenerator(
             IRepository<Database> databaseRepository,
             IBuilder<Table, Table> tableBuilder,
-            IBuilder<Table, string> classStringBuilder)
+            Func<IBuilder<Table, string>> classStringBuilder)
         {
             _databaseRepository = databaseRepository;
             _tableBuilder = tableBuilder;
@@ -49,7 +48,7 @@ namespace SQLTableClassGenerator
 
             var tableDef = _tableBuilder.Build(table);
 
-            return _classStringBuilder.Build(tableDef, Settings.Default);
+            return _classStringBuilder().Build(tableDef);
         }
     }
 }

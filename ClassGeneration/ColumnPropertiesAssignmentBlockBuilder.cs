@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using ClassGeneration.Interfaces;
-using ClassGeneration.Properties;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -10,7 +9,7 @@ namespace ClassGeneration
 {
     public class ColumnPropertiesAssignmentBlockBuilder : IBuilder<IEnumerable<Column>, SyntaxList<StatementSyntax>>
     {
-        public SyntaxList<StatementSyntax> Build(IEnumerable<Column> columns, Settings settings)
+        public SyntaxList<StatementSyntax> Build(IEnumerable<Column> columns)
         {
             var seed = SyntaxFactory.List<StatementSyntax>();
 

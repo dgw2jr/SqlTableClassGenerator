@@ -3,7 +3,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using ClassGeneration.Interfaces;
-using ClassGeneration.Properties;
 using DataAccess;
 using Models;
 
@@ -18,7 +17,7 @@ namespace ClassGeneration.ModelBuilders
             _connectionHandler = connectionHandler;
         }
 
-        public IEnumerable<Column> Build(Table table, Settings settings)
+        public IEnumerable<Column> Build(Table table)
         {
             using (var conn = _connectionHandler.GetConnection())
             {

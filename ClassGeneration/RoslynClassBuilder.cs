@@ -1,5 +1,4 @@
 using ClassGeneration.Interfaces;
-using ClassGeneration.Properties;
 using Microsoft.CodeAnalysis;
 
 namespace ClassGeneration
@@ -13,10 +12,10 @@ namespace ClassGeneration
             _nodeBuilder = nodeBuilder;
         }
 
-        public string Build(T obj, Settings settings)
+        public string Build(T obj)
         {
             return _nodeBuilder
-                .Build(obj, settings)
+                .Build(obj)
                 .NormalizeWhitespace()
                 .GetText()
                 .ToString();

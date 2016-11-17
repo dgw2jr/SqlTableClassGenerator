@@ -5,13 +5,12 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis;
 using ClassGeneration.Interfaces;
 using Models;
-using ClassGeneration.Properties;
 
 namespace ClassGeneration
 {
     public sealed class ColumnParameterSyntaxBuilder : IBuilder<IEnumerable<Column>, ParameterSyntax[]>
     {
-        public ParameterSyntax[] Build(IEnumerable<Column> columns, Settings settings)
+        public ParameterSyntax[] Build(IEnumerable<Column> columns)
         {
             var parameters = columns.Aggregate(new SyntaxList<ParameterSyntax>(),
                 (seed, curr) =>
