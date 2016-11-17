@@ -26,6 +26,7 @@ namespace ClassGeneration.ModelBuilders
 
                 var cmd = conn.CreateCommand() as SqlCommand;
                 cmd.CommandText = $"select top 0 * from {table.Schema}.{table.Name}";
+
                 var dt = new DataTable();
                 var da = new SqlDataAdapter(cmd);
 

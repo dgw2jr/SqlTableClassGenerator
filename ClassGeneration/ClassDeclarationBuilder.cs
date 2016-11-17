@@ -4,6 +4,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Editing;
 using ClassGeneration.Interfaces;
 using Models;
+using System;
 
 namespace ClassGeneration
 {
@@ -18,6 +19,8 @@ namespace ClassGeneration
             IClassDeclarationModifier classDeclarationModifier)
         {
             var _ = typeof(Microsoft.CodeAnalysis.CSharp.Formatting.CSharpFormattingOptions);
+            Console.WriteLine(_.Name);
+
             _generator = SyntaxGenerator.GetGenerator(new AdhocWorkspace(), LanguageNames.CSharp);
 
             _memberBuilders = memberBuilders.OrderBy(m => m.GetType().Name);
