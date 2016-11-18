@@ -10,18 +10,17 @@ namespace ClassGeneration.ModelBuilders
 {
     public class ColumnBuilder : IBuilder<Table, IEnumerable<Column>>
     {
-        private readonly IConnectionHandler _connectionHandler;
+        private readonly ISQLConnectionResource _dbResource;
 
-        public ColumnBuilder(IConnectionHandler connectionHandler)
+        public ColumnBuilder(ISQLConnectionResource dbResource)
         {
-            _connectionHandler = connectionHandler;
+            _dbResource = dbResource;
         }
 
         public IEnumerable<Column> Build(Table table)
         {
-            using (var conn = _connectionHandler.GetConnection())
+            return _dbResource.Invoke(conn =>
             {
-                conn.Open();
                 conn.ChangeDatabase(table.DatabaseName);
 
                 var cmd = conn.CreateCommand() as SqlCommand;
@@ -45,7 +44,7 @@ namespace ClassGeneration.ModelBuilders
                     .Select(c => new Column(c.ColumnName, c.DataType.UnderlyingSystemType));
 
                 return columnDefs;
-            }
+            });
         }
     }
 }

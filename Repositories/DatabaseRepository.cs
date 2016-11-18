@@ -8,18 +8,18 @@ namespace Repositories
 {
     public class DatabaseRepository : IRepository<Database>
     {
-        private readonly IConnectionHandler _connectionHandler;
+        private readonly ISQLConnectionResource _dbResource;
         private readonly ExcludedDatabaseNameCollection _excludedDatabaseNames;
         private readonly IDatabaseBuilder<Database> _databaseBuilder;
 
         private IEnumerable<Database> _databases;
 
         public DatabaseRepository(
-            IConnectionHandler connectionHandler,
+            ISQLConnectionResource dbResource,
             ExcludedDatabaseNameCollection excludedDatabaseNames,
             IDatabaseBuilder<Database> databaseBuilder)
         {
-            _connectionHandler = connectionHandler;
+            _dbResource = dbResource;
             _excludedDatabaseNames = excludedDatabaseNames;
             _databaseBuilder = databaseBuilder;
         }
@@ -34,18 +34,13 @@ namespace Repositories
 
         private void Initialize()
         {
-            using (var conn = _connectionHandler.GetConnection())
-            {
-                conn.Open();
-
-                _databases = conn
+            _databases = _dbResource.Invoke(conn => conn
                     .GetSchema("Databases")
                     .AsEnumerable()
                     .Where(row => !_excludedDatabaseNames.Contains(row[0].ToString()))
                     .OrderBy(o => o[0])
                     .Select(row => _databaseBuilder.Build(row[0].ToString(), conn))
-                    .ToList();
-            }
+                    .ToList());
         }
     }
 }

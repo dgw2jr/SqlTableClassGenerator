@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using DataAccess;
 using Models;
+using Repositories;
 using SQLTableClassGenerator.Interfaces;
 
 namespace SQLTableClassGenerator

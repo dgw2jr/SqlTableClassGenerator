@@ -43,6 +43,7 @@
     <Compile Include="DatabaseBuilder.cs" />
     <Compile Include="DatabaseRepository.cs" />
     <Compile Include="IDatabaseBuilder.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

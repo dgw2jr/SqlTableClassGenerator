@@ -9,12 +9,12 @@ namespace SQLTableClassGenerator
 {
     public partial class MainForm : Form
     {
-        private readonly IConnectionHandler _connectionHandler;
+        private readonly IConnectionSetter _connectionHandler;
         private readonly IPopulator _treeViewPopulator;
         private readonly ITreeNodeClassGenerator _treeNodeClassGenerator;
 
         public MainForm(
-            IConnectionHandler connectionHandler,
+            IConnectionSetter connectionHandler,
             IPopulator treePopulator,
             ITreeNodeClassGenerator treeNodeClassGenerator,
             TreeView tree)

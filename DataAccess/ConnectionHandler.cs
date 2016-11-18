@@ -1,24 +1,15 @@
 ﻿using System;
-using System.Data.Common;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using DataAccess.Properties;
 
 namespace DataAccess
 {
-    public class ConnectionHandler : IConnectionHandler
+    public class ConnectionHandler : IConnectionSetter, ISQLConnectionResource
     {
-        private static string defaultServer = ".\\sqlexpress";
-
-        private string server;
-
-        private string GetConnectionString()
-        {
-            return string.Format("data source={0};integrated security=true;", server);
-        }
-
         public void SetConnection()
         {
-            string input = Microsoft.VisualBasic.Interaction.InputBox("SQL Server to connect to:", "Connect", defaultServer);
+            string input = Microsoft.VisualBasic.Interaction.InputBox("SQL Server to connect to:", "Connect", Settings.Default.Server);
             if (input.Length == 0) Environment.Exit(1);
 
             using (var conn = new SqlConnection(string.Format("data source={0};integrated security=true;", input)))
@@ -26,7 +17,7 @@ namespace DataAccess
                 try
                 {
                     conn.Open();
-                    server = input;
+                    Settings.Default.Server = input;
                 }
                 catch
                 {
@@ -35,10 +26,24 @@ namespace DataAccess
                 }
             }
         }
+        
+        public T Invoke<T>(Func<SqlConnection, T> action)
+        {
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                return action(connection);
+            }
+        }
 
-        public DbConnection GetConnection()
+        private SqlConnection GetConnection()
         {
             return new SqlConnection(GetConnectionString());
+        }
+
+        private string GetConnectionString()
+        {
+            return string.Format("data source={0};integrated security=true;", Settings.Default.Server);
         }
     }
 }

@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Windows.Forms;
 using ClassGeneration.Interfaces;
-using DataAccess;
 using Models;
+using Repositories;
 using SQLTableClassGenerator.Interfaces;
 
 namespace SQLTableClassGenerator
