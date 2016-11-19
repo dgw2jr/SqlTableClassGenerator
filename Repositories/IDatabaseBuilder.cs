@@ -1,9 +1,7 @@
-﻿using System.Data.Common;
-
-namespace Repositories
+﻿namespace Repositories
 {
     public interface IDatabaseBuilder<out TOut>
     {
-        TOut Build(string databaseName, DbConnection connection);
+        TOut Build(string databaseName);
     }
 }

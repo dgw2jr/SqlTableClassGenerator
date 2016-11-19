@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using DataAccess.Properties;
@@ -34,6 +35,23 @@ namespace DataAccess
                 connection.Open();
                 return action(connection);
             }
+        }
+
+        public T Execute<T>(string databaseName, string commandText, Func<DataTable, T> selector)
+        {
+            return Invoke(conn =>
+            {
+                conn.ChangeDatabase(databaseName);
+
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = commandText;
+
+                var dt = new DataTable();
+
+                new SqlDataAdapter(cmd).Fill(dt);
+
+                return selector(dt);
+            });
         }
 
         private SqlConnection GetConnection()

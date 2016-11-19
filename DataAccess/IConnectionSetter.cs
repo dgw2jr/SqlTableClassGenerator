@@ -1,6 +1,4 @@
-﻿using System.Data.SqlClient;
-
-namespace DataAccess
+﻿namespace DataAccess
 {
     public interface IConnectionSetter
     {

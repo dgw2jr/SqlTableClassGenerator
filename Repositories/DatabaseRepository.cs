@@ -39,7 +39,7 @@ namespace Repositories
                     .AsEnumerable()
                     .Where(row => !_excludedDatabaseNames.Contains(row[0].ToString()))
                     .OrderBy(o => o[0])
-                    .Select(row => _databaseBuilder.Build(row[0].ToString(), conn))
+                    .Select(row => _databaseBuilder.Build(row[0].ToString()))
                     .ToList());
         }
     }

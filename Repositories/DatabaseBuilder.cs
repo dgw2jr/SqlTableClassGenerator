@@ -1,25 +1,35 @@
 ﻿using System.Data;
-using System.Data.Common;
 using System.Linq;
+using DataAccess;
 using Models;
 
 namespace Repositories
 {
     public class DatabaseBuilder : IDatabaseBuilder<Database>
     {
-        public Database Build(string databaseName, DbConnection connection)
+        private readonly ISQLConnectionResource _dbResource;
+
+        public DatabaseBuilder(ISQLConnectionResource dbResource)
         {
-            connection.ChangeDatabase(databaseName);
+            _dbResource = dbResource;
+        }
 
-            var tables = connection
-                .GetSchema("Tables")
-                .AsEnumerable()
-                .OrderBy(o => o[2])
-                .Select(table => 
-                    new Table(databaseName, table.Field<string>("table_name"), table.Field<string>("table_schema")))
-                .ToList();
+        public Database Build(string databaseName)
+        {
+            return _dbResource.Invoke(conn =>
+            {
+                conn.ChangeDatabase(databaseName);
 
-            return new Database(databaseName, tables);
+                var tables = conn
+                    .GetSchema("Tables")
+                    .AsEnumerable()
+                    .OrderBy(o => o[2])
+                    .Select(table =>
+                        new Table(databaseName, table.Field<string>("table_name"), table.Field<string>("table_schema")))
+                    .ToList();
+
+                return new Database(databaseName, tables);
+            });
         }
     }
 }

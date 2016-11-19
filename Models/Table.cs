@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 
 namespace Models
 {
@@ -9,7 +11,7 @@ namespace Models
             DatabaseName = databaseName;
             Name = name;
             Schema = schema;
-            Columns = new List<Column>();
+            Columns = Enumerable.Empty<Column>();
         }
 
         public Table(string databaseName, string name, string schema, IEnumerable<Column> columnDefs)
@@ -37,6 +39,22 @@ namespace Models
             {
                 return $"{Schema}.{Name}";
             }
+        }
+
+        public string EmptyRowCommand
+        {
+            get
+            {
+                return $"select top 0 * from {Schema}.{Name}";
+            }
+        }
+
+        public IEnumerable<Column> GetColumns(DataTable table)
+        {
+            return table.Columns
+                .Cast<DataColumn>()
+                .OrderBy(c => c.ColumnName)
+                .Select(c => new Column(c.ColumnName, c.DataType.UnderlyingSystemType));
         }
     }
 }
