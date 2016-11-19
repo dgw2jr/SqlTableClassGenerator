@@ -44,7 +44,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -59,9 +61,23 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DatabaseBuilderTests.cs" />
+    <Compile Include="DatabaseRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{FE86F4FB-1FC2-4D58-A18D-48A11D7C062D}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{F9D92C52-E1E2-4D24-970A-AF98D3624891}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Repositories\Repositories.csproj">
+      <Project>{B61215A1-9FD8-43D4-9063-DD1DCD6051B5}</Project>
+      <Name>Repositories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SQLTableClassGenerator\SQLTableClassGenerator.csproj">
       <Project>{44e38438-59dc-4d26-924f-15b33fb66dd2}</Project>
       <Name>SQLTableClassGenerator</Name>

@@ -16,20 +16,18 @@ namespace Repositories
 
         public Database Build(string databaseName)
         {
-            return _dbResource.Invoke(conn =>
+            var tables = _dbResource.Invoke(conn =>
             {
                 conn.ChangeDatabase(databaseName);
+                return conn.GetSchema("Tables");
+            })
+            .AsEnumerable()
+            .OrderBy(o => o[2])
+            .Select(table =>
+                new Table(databaseName, table.Field<string>("table_name"), table.Field<string>("table_schema")))
+            .ToList();
 
-                var tables = conn
-                    .GetSchema("Tables")
-                    .AsEnumerable()
-                    .OrderBy(o => o[2])
-                    .Select(table =>
-                        new Table(databaseName, table.Field<string>("table_name"), table.Field<string>("table_schema")))
-                    .ToList();
-
-                return new Database(databaseName, tables);
-            });
+            return new Database(databaseName, tables);
         }
     }
 }
