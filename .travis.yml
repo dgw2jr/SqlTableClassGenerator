@@ -1,7 +1,5 @@
 language: csharp
 solution: SQLTableClassGenerator.sln
-mono: none
-dotnet: 1.0.0-preview2-003131
 sudo: required
 
 before_install:
