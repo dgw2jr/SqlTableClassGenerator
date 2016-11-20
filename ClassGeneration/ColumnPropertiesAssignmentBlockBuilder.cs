@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using ClassGeneration.Interfaces;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -11,19 +12,13 @@ namespace ClassGeneration
     {
         public SyntaxList<StatementSyntax> Build(IEnumerable<Column> columns)
         {
-            var seed = SyntaxFactory.List<StatementSyntax>();
-
-            foreach (var column in columns)
-            {
-                seed = seed.Add(
+            return columns.Aggregate(SyntaxFactory.List<StatementSyntax>(), 
+                (seed, column) => seed.Add(
                     SyntaxFactory.ExpressionStatement(
                         SyntaxFactory.AssignmentExpression(
                             SyntaxKind.SimpleAssignmentExpression,
                             SyntaxFactory.IdentifierName(column.Field),
-                            SyntaxFactory.IdentifierName(column.Field.ToCamelCase()))));
-            }
-
-            return seed;
+                            SyntaxFactory.IdentifierName(column.Field.ToCamelCase())))));
         }
     }
 }
