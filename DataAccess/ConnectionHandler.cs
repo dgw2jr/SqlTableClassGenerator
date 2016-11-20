@@ -8,12 +8,19 @@ namespace DataAccess
 {
     public class ConnectionHandler : IConnectionSetter, ISQLConnectionResource
     {
+        private readonly Func<string, SqlConnection> _connectionFactory;
+
+        public ConnectionHandler(Func<string, SqlConnection> connectionFactory)
+        {
+            _connectionFactory = connectionFactory;
+        }
+
         public void SetConnection()
         {
             string input = Microsoft.VisualBasic.Interaction.InputBox("SQL Server to connect to:", "Connect", Settings.Default.Server);
             if (input.Length == 0) Environment.Exit(1);
 
-            using (var conn = new SqlConnection(string.Format("data source={0};integrated security=true;", input)))
+            using (var conn = _connectionFactory(string.Format("data source={0};integrated security=true;", input)))
             {
                 try
                 {
@@ -56,7 +63,7 @@ namespace DataAccess
 
         private SqlConnection GetConnection()
         {
-            return new SqlConnection(GetConnectionString());
+            return _connectionFactory(GetConnectionString());
         }
 
         private string GetConnectionString()
