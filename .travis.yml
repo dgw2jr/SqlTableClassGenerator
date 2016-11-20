@@ -2,6 +2,7 @@ language: csharp
 solution: SQLTableClassGenerator.sln
 mono: none
 dotnet: 1.0.0-preview2-003131
+os: osx
 
 before_install:
   - mkdir -p .nuget
