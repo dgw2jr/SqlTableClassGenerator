@@ -1,9 +1,9 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Windows.Forms;
 using SQLTableClassGenerator.Interfaces;
 using SQLTableClassGenerator.Properties;
 using DataAccess;
+using System.Threading.Tasks;
 
 namespace SQLTableClassGenerator
 {
@@ -31,14 +31,7 @@ namespace SQLTableClassGenerator
         {
             _connectionHandler.SetConnection();
 
-            BackgroundWorker bgw = new BackgroundWorker();
-            bgw.DoWork += new DoWorkEventHandler(bgw_DoWork);
-            bgw.RunWorkerAsync();
-        }
-
-        private void bgw_DoWork(object sender, DoWorkEventArgs e)
-        {
-            _treeViewPopulator.Populate();
+            Task.Run(() => _treeViewPopulator.Populate());
         }
         
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
