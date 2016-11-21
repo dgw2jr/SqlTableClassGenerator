@@ -37,9 +37,10 @@ namespace Repositories
             _databases = _dbResource.Invoke(conn => conn
                     .GetSchema("Databases"))
                     .AsEnumerable()
-                    .Where(row => !_excludedDatabaseNames.Contains(row[0].ToString()))
-                    .OrderBy(o => o[0])
-                    .Select(row => _databaseBuilder.Build(row[0].ToString()));
+                    .Select(row => row[0].ToString())
+                    .Where(name => !_excludedDatabaseNames.Contains(name))
+                    .OrderBy(name => name)
+                    .Select(name => _databaseBuilder.Build(name));
         }
     }
 }
