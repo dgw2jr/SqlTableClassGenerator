@@ -9,18 +9,18 @@ namespace SQLTableClassGenerator
 {
     public partial class MainForm : Form
     {
-        private readonly IConnectionSetter _connectionHandler;
+        private readonly IConnectionSetter _connectionSetter;
         private readonly IPopulator _treeViewPopulator;
         private readonly ITreeNodeClassGenerator _treeNodeClassGenerator;
 
         public MainForm(
-            IConnectionSetter connectionHandler,
+            IConnectionSetter connectionSetter,
             IPopulator treePopulator,
             ITreeNodeClassGenerator treeNodeClassGenerator,
             TreeView tree)
         {
             treeView1 = tree;
-            _connectionHandler = connectionHandler;
+            _connectionSetter = connectionSetter;
             _treeViewPopulator = treePopulator;
             _treeNodeClassGenerator = treeNodeClassGenerator;
 
@@ -29,7 +29,7 @@ namespace SQLTableClassGenerator
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            _connectionHandler.SetConnection();
+            _connectionSetter.SetConnection();
 
             Task.Run(() => _treeViewPopulator.Populate());
         }
