@@ -5,17 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFClient"
         xmlns:models="clr-namespace:Models;assembly=Models"
+        xmlns:p="clr-namespace:WPFClient.Properties"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525"
+        Title="SQL Table Class Generator" Height="600" Width="800"
         Loaded="Window_Loaded">
     <Grid>
         <DockPanel>
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="Options">
-                    <MenuItem Header="Generate Constructor" IsCheckable="True"></MenuItem>
-                    <MenuItem Header="Seal Class" IsCheckable="True"></MenuItem>
-                    <MenuItem Header="Private Setters" IsCheckable="True"></MenuItem>
-                    <MenuItem Header="Immutable" IsCheckable="True"></MenuItem>
+                    <MenuItem Header="Generate Constructor" IsCheckable="True" 
+                              IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=GenerateConstructor, Mode=TwoWay}"
+                              Click="MenuItem_Click"/>
+                    <MenuItem Header="Seal Class" IsCheckable="True"
+                              IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=IsSealed, Mode=TwoWay}"
+                              Click="MenuItem_Click"/>
+                    <MenuItem Header="Private Setters" IsCheckable="True"
+                              IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=PrivateSetters, Mode=TwoWay}"
+                              Click="MenuItem_Click"/>
+                    <MenuItem Header="Immutable" IsCheckable="True"
+                              IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=Immutable, Mode=TwoWay}" 
+                              Click="MenuItem_Click"/>
                 </MenuItem>
             </Menu>
             <Grid>
@@ -24,7 +33,7 @@
                     <ColumnDefinition Width="2"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TreeView 
+                <TreeView
                     Grid.Column="0" 
                     x:Name="treeView" 
                     Height="Auto" 
@@ -38,7 +47,9 @@
                             <TextBlock Text="{Binding Name}"/>
                             <HierarchicalDataTemplate.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding NameWithSchemaPrefix}" MouseUp="TextBlock_MouseUp"/>
+                                    <TextBlock
+                                        Text="{Binding NameWithSchemaPrefix}" 
+                                        MouseUp="TextBlock_MouseUp"/>
                                 </DataTemplate>
                             </HierarchicalDataTemplate.ItemTemplate>
                         </HierarchicalDataTemplate>
@@ -51,12 +62,16 @@
                     Grid.Column="1" 
                     HorizontalAlignment="Stretch" 
                     VerticalAlignment="Stretch"/>
-                <RichTextBox 
+                <TextBox
                     x:Name="richTextBox" 
                     Grid.Column="2"
-                    VerticalScrollBarVisibility="Auto" 
+                    VerticalScrollBarVisibility="Auto"
+                    HorizontalScrollBarVisibility="Auto"
                     VerticalAlignment="Stretch" 
-                    HorizontalAlignment="Stretch" />
+                    HorizontalAlignment="Stretch"
+                    FontFamily="Consolas" 
+                    TextOptions.TextFormattingMode="Display"
+                    />
             </Grid>
         </DockPanel>
     </Grid>
