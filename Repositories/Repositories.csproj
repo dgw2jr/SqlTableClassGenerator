@@ -44,7 +44,9 @@
     <Compile Include="DatabaseRepository.cs" />
     <Compile Include="IDatabaseBuilder.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="ITableListBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TableListBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ClassGeneration\ClassGeneration.csproj">

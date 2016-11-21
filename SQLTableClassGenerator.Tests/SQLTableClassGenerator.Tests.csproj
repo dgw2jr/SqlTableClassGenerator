@@ -61,9 +61,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="DatabaseBuilderTests.cs" />
+    <Compile Include="TableListBuilderTests.cs" />
     <Compile Include="DatabaseRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TableSchemaDataTableBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">

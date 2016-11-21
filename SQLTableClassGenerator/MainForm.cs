@@ -57,6 +57,11 @@ namespace SQLTableClassGenerator
             SetTextBoxText(() => Settings.Default.PrivateSetters = ((ToolStripMenuItem)sender).Checked);
         }
 
+        private void immutableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetTextBoxText(() => Settings.Default.Immutable = ((ToolStripMenuItem)sender).Checked);
+        }
+
         private void SetTextBoxText(Action action = null)
         {
             richTextBox1.Text = _treeNodeClassGenerator.Generate(treeView1.SelectedNode, action);

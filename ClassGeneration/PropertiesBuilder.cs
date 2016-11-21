@@ -18,10 +18,9 @@ namespace ClassGeneration
 
         public IEnumerable<SyntaxNode> Build(Table table)
         {
-            var props = table.Columns.Select(c =>
-                _columnPropertyGenerator.Build(c)).ToList();
-
-            return props;
+            return table.Columns
+                .Select(c => _columnPropertyGenerator.Build(c))
+                .ToList();
         }
     }
 }

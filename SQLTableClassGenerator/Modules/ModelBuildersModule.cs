@@ -9,6 +9,7 @@ namespace SQLTableClassGenerator.Modules
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<DatabaseBuilder>().AsImplementedInterfaces();
+            builder.RegisterType<TableListBuilder>().AsImplementedInterfaces();
             builder.RegisterType<TableBuilder>().AsImplementedInterfaces();
             builder.RegisterType<ColumnBuilder>().AsImplementedInterfaces();
         }

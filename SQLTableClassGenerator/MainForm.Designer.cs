@@ -1,6 +1,8 @@
-﻿namespace SQLTableClassGenerator
+﻿using System;
+
+namespace SQLTableClassGenerator
 {
-    partial class MainForm
+    public partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -35,6 +37,7 @@
             this.generateConstructorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sealClassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.privateSettersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.immutableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -105,7 +108,8 @@
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.generateConstructorToolStripMenuItem,
             this.sealClassToolStripMenuItem,
-            this.privateSettersToolStripMenuItem});
+            this.privateSettersToolStripMenuItem,
+            this.immutableToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(111, 38);
             this.optionsToolStripMenuItem.Text = "Options";
@@ -133,6 +137,15 @@
             this.privateSettersToolStripMenuItem.Size = new System.Drawing.Size(343, 38);
             this.privateSettersToolStripMenuItem.Text = "Private Setters";
             this.privateSettersToolStripMenuItem.Click += new System.EventHandler(this.privateSettersToolStripMenuItem_Click);
+            // 
+            // immutableToolStripMenuItem
+            // 
+            this.immutableToolStripMenuItem.CheckOnClick = true;
+            this.immutableToolStripMenuItem.Name = "immutableToolStripMenuItem";
+            this.immutableToolStripMenuItem.Size = new System.Drawing.Size(343, 38);
+            this.immutableToolStripMenuItem.Text = "Immutable";
+            this.immutableToolStripMenuItem.Click += new System.EventHandler(this.immutableToolStripMenuItem_Click);
+
             // 
             // toolStripContainer1
             // 
@@ -181,7 +194,6 @@
             this.ResumeLayout(false);
 
         }
-
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
@@ -193,6 +205,7 @@
         private System.Windows.Forms.ToolStripContainer toolStripContainer1;
         private System.Windows.Forms.TextBox richTextBox1;
         private System.Windows.Forms.ToolStripMenuItem privateSettersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem immutableToolStripMenuItem;
     }
 }
 

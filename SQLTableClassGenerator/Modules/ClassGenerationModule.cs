@@ -22,8 +22,9 @@ namespace SQLTableClassGenerator.Modules
             builder.Register(c => Settings.Default).As<Settings>();
 
             builder.Register<ConstructorBuilder, NullTableSyntaxNodesBuilder, ISyntaxNodesBuilder<Table>>(() => Settings.Default.GenerateConstructor);
-            builder.Register<PrivatePropertySetterAccessibilityModifier, NullPropertySetterAccessibilityModifier, IPropertySetterAccessibilityModifier>(() => Settings.Default.PrivateSetters);
+            builder.Register<PrivateModifier, NullModifier, IPropertySetterAccessibilityModifier>(() => Settings.Default.PrivateSetters);
             builder.Register<SealedClassDeclarationModifier, NullClassDeclarationModifier, IClassDeclarationModifier>(() => Settings.Default.IsSealed);
+            builder.Register<PropertyGetter, PropertyGetterAndSetter, IPropertyAccessorDeclarations>(() => Settings.Default.Immutable);
         }
     }
 
