@@ -1,25 +1,28 @@
 ﻿using System;
 using Autofac;
 using Autofac.Builder;
-using ClassGeneration;
 using ClassGeneration.Interfaces;
-using WPFClient.Properties;
+using ClassGeneration.Properties;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Editing;
 using Models;
 
-namespace WPFClient.Modules
+namespace ClassGeneration.Modules
 {
-    internal class ClassGenerationModule : Module
+    public class ClassGenerationModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.Register(c => SyntaxGenerator.GetGenerator(new AdhocWorkspace(), LanguageNames.CSharp))
+                .As<SyntaxGenerator>()
+                .SingleInstance();
+
             builder.RegisterGeneric(typeof(RoslynClassBuilder<>)).AsImplementedInterfaces();
             builder.RegisterGeneric(typeof(ClassDeclarationBuilder<>)).AsImplementedInterfaces();
             builder.RegisterType<ColumnPropertiesAssignmentBlockBuilder>().AsImplementedInterfaces();
             builder.RegisterType<ColumnParameterSyntaxBuilder>().AsImplementedInterfaces();
             builder.RegisterType<ColumnPropertyBuilder>().AsImplementedInterfaces();
             builder.RegisterType<PropertiesBuilder>().AsImplementedInterfaces();
-            
-            builder.Register(c => Settings.Default).As<Settings>();
 
             builder.Register<ConstructorBuilder, NullTableSyntaxNodesBuilder, ISyntaxNodesBuilder<Table>>(() => Settings.Default.GenerateConstructor);
             builder.Register<PrivateModifier, NullModifier, IPropertySetterAccessibilityModifier>(() => Settings.Default.PrivateSetters);
@@ -28,7 +31,7 @@ namespace WPFClient.Modules
         }
     }
 
-    internal static class BuilderExtensions
+    public static class BuilderExtensions
     {
         internal static IRegistrationBuilder<TOut, SimpleActivatorData, SingleRegistrationStyle> Register<TOn, TOff, TOut>(this ContainerBuilder builder, Func<bool> predicate)
             where TOn : TOut

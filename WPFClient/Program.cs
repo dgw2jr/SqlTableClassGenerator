@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Windows;
 using Autofac;
+using ClassGeneration.Modules;
 
 namespace WPFClient
 {
@@ -20,6 +21,7 @@ namespace WPFClient
             var builder = new ContainerBuilder();
 
             builder.RegisterAssemblyModules(Assembly.GetExecutingAssembly());
+            builder.RegisterAssemblyModules(Assembly.GetAssembly(typeof(ClassGenerationModule)));
 
             return builder.Build();
         }

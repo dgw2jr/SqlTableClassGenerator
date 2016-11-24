@@ -80,10 +80,6 @@
       <Project>{B61215A1-9FD8-43D4-9063-DD1DCD6051B5}</Project>
       <Name>Repositories</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SQLTableClassGenerator\SQLTableClassGenerator.csproj">
-      <Project>{44e38438-59dc-4d26-924f-15b33fb66dd2}</Project>
-      <Name>SQLTableClassGenerator</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

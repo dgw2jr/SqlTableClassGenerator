@@ -1,14 +1,14 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="WPFClient.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ClassGeneration.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="GenerateConstructor" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="PrivateSetters" Type="System.Boolean" Scope="User">
+    <Setting Name="IsSealed" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="IsSealed" Type="System.Boolean" Scope="User">
+    <Setting Name="PrivateSetters" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="Immutable" Type="System.Boolean" Scope="User">

@@ -16,12 +16,13 @@ namespace ClassGeneration
 
         public ClassDeclarationBuilder(
             IEnumerable<ISyntaxNodesBuilder<TIn>> memberBuilders,
-            IClassDeclarationModifier classDeclarationModifier)
+            IClassDeclarationModifier classDeclarationModifier,
+            SyntaxGenerator syntaxGenerator)
         {
             var _ = typeof(Microsoft.CodeAnalysis.CSharp.Formatting.CSharpFormattingOptions);
             Console.WriteLine(_.Name);
 
-            _generator = SyntaxGenerator.GetGenerator(new AdhocWorkspace(), LanguageNames.CSharp);
+            _generator = syntaxGenerator;
 
             _memberBuilders = memberBuilders.OrderBy(m => m.GetType().Name);
             _classDeclarationModifier = classDeclarationModifier;
