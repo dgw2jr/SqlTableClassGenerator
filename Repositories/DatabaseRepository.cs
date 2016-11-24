@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using DataAccess;
@@ -12,7 +13,7 @@ namespace Repositories
         private readonly ExcludedDatabaseNameCollection _excludedDatabaseNames;
         private readonly IDatabaseBuilder<Database> _databaseBuilder;
 
-        private IEnumerable<Database> _databases;
+        private Lazy<IEnumerable<Database>> _databases;
 
         public DatabaseRepository(
             ISQLConnectionResource dbResource,
@@ -22,25 +23,25 @@ namespace Repositories
             _dbResource = dbResource;
             _excludedDatabaseNames = excludedDatabaseNames;
             _databaseBuilder = databaseBuilder;
+
+            Initialize();
         }
 
         public IEnumerable<Database> All()
         {
-            if (_databases == null)
-                Initialize();
-
-            return _databases;
+            return _databases.Value;
         }
 
         private void Initialize()
         {
-            _databases = _dbResource.Invoke(conn => conn
+            _databases = new Lazy<IEnumerable<Database>>(() => 
+                _dbResource.Invoke(conn => conn
                     .GetSchema("Databases"))
                     .AsEnumerable()
                     .Select(row => row[0].ToString())
                     .Where(name => !_excludedDatabaseNames.Contains(name))
                     .OrderBy(name => name)
-                    .Select(name => _databaseBuilder.Build(name));
+                    .Select(name => _databaseBuilder.Build(name)));
         }
     }
 }

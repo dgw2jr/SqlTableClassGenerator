@@ -61,6 +61,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DatabaseSchemaDataTableBuilder.cs" />
     <Compile Include="TableListBuilderTests.cs" />
     <Compile Include="DatabaseRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -41,7 +41,7 @@
                     VerticalAlignment="Stretch" 
                     HorizontalAlignment="Stretch" 
                     Width="Auto"
-                    ItemsSource="{Binding}">
+                    ItemsSource="{Binding}" Background="{DynamicResource ControlBackgroundBrush}">
                     <TreeView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding Tables}">
                             <TextBlock Text="{Binding Name}"/>
@@ -70,7 +70,8 @@
                     VerticalAlignment="Stretch" 
                     HorizontalAlignment="Stretch"
                     FontFamily="Consolas" 
-                    TextOptions.TextFormattingMode="Display"
+                    Background="{DynamicResource ControlBackgroundBrush}" 
+                    Foreground="{DynamicResource TextBrush}"
                     />
             </Grid>
         </DockPanel>
