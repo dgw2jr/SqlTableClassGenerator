@@ -2,13 +2,12 @@
 using System.Linq;
 using ClassGeneration.Interfaces;
 using Microsoft.CodeAnalysis;
-using Models;
 
 namespace ClassGeneration
 {
-    public class NullTableSyntaxNodesBuilder : ISyntaxNodesBuilder<Table>
+    public class NullClassMembersBuilder<T> : IClassMembersBuilder<T>
     {
-        public IEnumerable<SyntaxNode> Build(Table obj)
+        public IEnumerable<SyntaxNode> Build(T obj)
         {
             return Enumerable.Empty<SyntaxNode>();
         }

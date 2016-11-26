@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace ClassGeneration
 {
-    public sealed class PropertiesBuilder : ISyntaxNodesBuilder<Table>
+    public sealed class PropertiesBuilder : IClassMembersBuilder<Table>
     {
         private readonly IBuilder<Column, PropertyDeclarationSyntax> _columnPropertyGenerator;
 

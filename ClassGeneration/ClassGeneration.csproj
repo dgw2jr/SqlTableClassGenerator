@@ -175,13 +175,13 @@
     <Compile Include="Interfaces\IClassDeclarationModifier.cs" />
     <Compile Include="Interfaces\IBuilder.cs" />
     <Compile Include="Interfaces\IPropertySetterAccessibilityModifier.cs" />
-    <Compile Include="Interfaces\ISyntaxNodesBuilder.cs" />
+    <Compile Include="Interfaces\IClassMembersBuilder.cs" />
     <Compile Include="Interfaces\IPropertyAccessorDeclarations.cs" />
     <Compile Include="ModelBuilders\ColumnBuilder.cs" />
     <Compile Include="ModelBuilders\TableBuilder.cs" />
     <Compile Include="NullClassDeclarationModifier.cs" />
     <Compile Include="NullModifier.cs" />
-    <Compile Include="NullTableSyntaxNodesBuilder.cs" />
+    <Compile Include="NullClassMembersBuilder.cs" />
     <Compile Include="PrivateModifier.cs" />
     <Compile Include="PropertiesBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

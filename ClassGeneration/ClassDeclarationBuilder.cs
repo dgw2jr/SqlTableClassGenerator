@@ -12,10 +12,10 @@ namespace ClassGeneration
     {
         private readonly IClassDeclarationModifier _classDeclarationModifier;
         private readonly SyntaxGenerator _generator;
-        private readonly IEnumerable<ISyntaxNodesBuilder<TIn>> _memberBuilders;
+        private readonly IEnumerable<IClassMembersBuilder<TIn>> _memberBuilders;
 
         public ClassDeclarationBuilder(
-            IEnumerable<ISyntaxNodesBuilder<TIn>> memberBuilders,
+            IEnumerable<IClassMembersBuilder<TIn>> memberBuilders,
             IClassDeclarationModifier classDeclarationModifier,
             SyntaxGenerator syntaxGenerator)
         {
@@ -32,13 +32,11 @@ namespace ClassGeneration
         {
             var members = _memberBuilders.SelectMany(b => b.Build(obj)).ToList();
 
-            var classDeclaration = _generator.ClassDeclaration(
-                obj.Name, 
-                modifiers: _classDeclarationModifier.GetModifier(), 
+            return _generator.ClassDeclaration(
+                obj.Name,
+                modifiers: _classDeclarationModifier.GetModifier(),
                 members: members,
                 accessibility: Accessibility.Public);
-
-            return classDeclaration;
         }
     }
 }

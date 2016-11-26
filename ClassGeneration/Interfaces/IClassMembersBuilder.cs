@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis;
 
 namespace ClassGeneration.Interfaces
 {
-    public interface ISyntaxNodesBuilder<in TIn>
+    public interface IClassMembersBuilder<in TIn>
     {
         IEnumerable<SyntaxNode> Build(TIn obj);
     }

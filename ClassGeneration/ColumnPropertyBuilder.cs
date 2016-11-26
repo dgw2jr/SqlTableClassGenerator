@@ -16,11 +16,9 @@ namespace ClassGeneration
 
         public PropertyDeclarationSyntax Build(Column c)
         {
-            var prop = SyntaxFactory.PropertyDeclaration(SyntaxFactory.ParseTypeName(c.Type.Name), c.Field)
+            return SyntaxFactory.PropertyDeclaration(SyntaxFactory.ParseTypeName(c.Type.Name), c.Field)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
                 .AddAccessorListAccessors(_accessorDeclarations.GetDeclarations());
-
-            return prop;
         }
     }
 }

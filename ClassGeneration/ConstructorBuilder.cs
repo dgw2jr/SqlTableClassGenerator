@@ -7,7 +7,7 @@ using Models;
 
 namespace ClassGeneration
 {
-    public sealed class ConstructorBuilder : ISyntaxNodesBuilder<Table>
+    public sealed class ConstructorBuilder : IClassMembersBuilder<Table>
     {
         private readonly IBuilder<IEnumerable<Column>, ParameterSyntax[]> _ctorParameterBuilder;
         private readonly IBuilder<IEnumerable<Column>, SyntaxList<StatementSyntax>> _blockStatementListBuilder;
