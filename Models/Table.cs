@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Models
 {
-    public class Table : IHasName
+    public class Table
     {
         public Table(string databaseName, string name, string schema)
         {

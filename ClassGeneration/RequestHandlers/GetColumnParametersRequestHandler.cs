@@ -1,23 +1,22 @@
 using System.Linq;
-using System.Collections.Generic;
+using ClassGeneration.Requests;
+using MediatR;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis;
-using ClassGeneration.Interfaces;
-using Models;
 
-namespace ClassGeneration
+namespace ClassGeneration.RequestHandlers
 {
-    public sealed class ColumnParameterSyntaxBuilder : IBuilder<IEnumerable<Column>, ParameterSyntax[]>
+    public sealed class GetColumnParametersRequestHandler : IRequestHandler<GetColumnParametersRequest, ParameterSyntax[]>
     {
-        public ParameterSyntax[] Build(IEnumerable<Column> columns)
+        public ParameterSyntax[] Handle(GetColumnParametersRequest message)
         {
-            var parameters = columns.Aggregate(new SyntaxList<ParameterSyntax>(),
+            var parameters = message.Columns.Aggregate(new SyntaxList<ParameterSyntax>(),
                 (seed, curr) =>
                     seed.Add(
                         SyntaxFactory.Parameter(SyntaxFactory.ParseToken(curr.Field.ToCamelCase()))
                             .WithType(SyntaxFactory.ParseTypeName(curr.Type.Name))));
-            
+
             return parameters.ToArray();
         }
     }

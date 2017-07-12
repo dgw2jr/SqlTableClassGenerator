@@ -5,36 +5,37 @@ using Microsoft.CodeAnalysis.Editing;
 using ClassGeneration.Interfaces;
 using Models;
 using System;
+using ClassGeneration.Requests;
+using MediatR;
 
 namespace ClassGeneration
 {
-    public sealed class ClassDeclarationBuilder<TIn> : IBuilder<TIn, SyntaxNode> where TIn : IHasName
+    public sealed class ClassDeclarationBuilder : IBuilder<Table, SyntaxNode>
     {
-        private readonly IClassDeclarationModifier _classDeclarationModifier;
         private readonly SyntaxGenerator _generator;
-        private readonly IEnumerable<IClassMembersBuilder<TIn>> _memberBuilders;
+        private readonly IMediator _mediator;
 
-        public ClassDeclarationBuilder(
-            IEnumerable<IClassMembersBuilder<TIn>> memberBuilders,
-            IClassDeclarationModifier classDeclarationModifier,
-            SyntaxGenerator syntaxGenerator)
+        public ClassDeclarationBuilder(SyntaxGenerator syntaxGenerator,
+            IMediator mediator)
         {
             var _ = typeof(Microsoft.CodeAnalysis.CSharp.Formatting.CSharpFormattingOptions);
             Console.WriteLine(_.Name);
 
             _generator = syntaxGenerator;
-
-            _memberBuilders = memberBuilders.OrderBy(m => m.GetType().Name);
-            _classDeclarationModifier = classDeclarationModifier;
+            _mediator = mediator;
         }
 
-        public SyntaxNode Build(TIn obj)
+        public SyntaxNode Build(Table table)
         {
-            var members = _memberBuilders.SelectMany(b => b.Build(obj)).ToList();
+            var members = new List<SyntaxNode>();
+            members.AddRange(_mediator.Send(new GetConstructorBlockRequest { Table = table }).Result);
+            members.AddRange(table.Columns
+                .Select(c => _mediator.Send(new GetPropertyForColumnRequest { Column = c }).Result)
+                .ToList());
 
             return _generator.ClassDeclaration(
-                obj.Name,
-                modifiers: _classDeclarationModifier.GetModifier(),
+                table.Name,
+                modifiers: _mediator.Send(new GetClassDeclarationModifierRequest()).Result,
                 members: members,
                 accessibility: Accessibility.Public);
         }

@@ -1,18 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using ClassGeneration.Interfaces;
+﻿using System.Linq;
+using ClassGeneration.Requests;
+using MediatR;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Models;
 
-namespace ClassGeneration
+namespace ClassGeneration.RequestHandlers
 {
-    public class ColumnPropertiesAssignmentBlockBuilder : IBuilder<IEnumerable<Column>, SyntaxList<StatementSyntax>>
+    public class GetColumnPropertiesAssignmentBlockRequestHandler : IRequestHandler<GetColumnPropertiesAssignmentBlockRequest, SyntaxList<StatementSyntax>>
     {
-        public SyntaxList<StatementSyntax> Build(IEnumerable<Column> columns)
+        public SyntaxList<StatementSyntax> Handle(GetColumnPropertiesAssignmentBlockRequest message)
         {
-            return columns.Aggregate(SyntaxFactory.List<StatementSyntax>(), 
+            return message.Columns.Aggregate(SyntaxFactory.List<StatementSyntax>(),
                 (seed, column) => seed.Add(
                     SyntaxFactory.ExpressionStatement(
                         SyntaxFactory.AssignmentExpression(
